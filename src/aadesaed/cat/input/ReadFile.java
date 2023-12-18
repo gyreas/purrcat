@@ -13,7 +13,7 @@ public class ReadFile {
 
    /* Return a file in memory */
    public static Path get_file(String path) {
-      Path       file = Paths.get(path);
+      Path   file = Paths.get(path);
       return file;
    }
 
