@@ -1,6 +1,5 @@
 package aadesaed.cat.app;
 
-import static org.apache.commons.cli.CommandLine.*;
 import static java.lang.System.exit;
 
 import aadesaed.cat.cmdline.Args;
@@ -9,7 +8,7 @@ public class App {
    // TODO: Use a HashTable for this
    private static String program      = "cat";
    private static String license      = "BSD 2.0"; // TODO: read from a file
-   private static String version      = "0.0.1"; // TODO: read from a file
+   private static String version      = "v0.0.1"; // TODO: read from a file
    private static String author       = "Saheed Adeleye";
    private static String author_email = "aadesaed@tuta.io";
    private static String newline      = System.getProperty("line.separator");
