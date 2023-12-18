@@ -11,6 +11,7 @@ It's a toy program to improve my familiarity with the Java ecosystem.
 4. Test with: `./app.sh <options & files here>`
 
 ### TODO
+- [ ] implement tiny testing library / find a tiny library jar
 - [ ] implement file i/o etc
 - [ ] implement feature's of Unix cat, so that this cat can purr.
 - [ ] use functional programming techniques, ie, implement each feature as a 
