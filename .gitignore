@@ -1,1 +1,2 @@
-*.class
+/lib
+src/aadesaed/cat/**/*.class
