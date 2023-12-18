@@ -22,23 +22,23 @@ public class App {
       // if "--help" or "-h" (print_usage()) # prio 1 (highest)
       // if "--version" or "-v" (print_version()) (2nd highest, except when it's the first opt) 
       // 
-      Args a;
-      if (args.length == 0) a = Args.default_args();
-      else                  a = Args.parse_args(args);
+      Args config;
+      if (args.length == 0) config = Args.default_args();
+      else                  config = Args.parse_args(args);
 
-      if (a.display_help) {
+      if (config.display_help) {
          print_version(); 
          print_usage(); 
          exit(0); 
       }
-      if (a.display_version) {
+      if (config.display_version) {
          print_version(); 
          exit(0); 
       }
 
-      if (a.files.size() == 0) System.out.println();
+      if (config.files.size() == 0) System.out.println();
       else { 
-         for (String path : a.files) {
+         for (String path : config.files) {
             Path p = ReadFile.get_file(path);
 
             try {

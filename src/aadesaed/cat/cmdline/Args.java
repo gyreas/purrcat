@@ -15,22 +15,24 @@ public class Args {
     * -n | --number-lines
     * <files>
     */
-   public boolean           display_help;
-   public boolean           display_version;
-   public boolean           display_line_numbers;
-   public ArrayList<String> files;
+   public ArrayList<String>   files;
+   public boolean             display_help;
+   public boolean             display_version;
+   public boolean             display_line_numbers;
+   public boolean             display_nonblank_lines;
 
    public Args() {
-      this.files = new ArrayList<>();
+      files = new ArrayList<>();
    }
 
    /** Return an Args with default values */
    public static Args default_args() {
-      var config                  = new Args();
-      config.display_help         = false;
-      config.display_version      = true;
-      config.display_line_numbers = false;
-      config.files                = new ArrayList<>();
+      var config                       = new Args();
+      config.display_help              = false;
+      config.display_line_numbers      = false;
+      config.display_version           = true; // indicates that the app works, just no input file
+      config.display_nonblank_lines    = true;
+      config.files                     = new ArrayList<>();
       return config;
    }
 
@@ -56,7 +58,9 @@ public class Args {
             a.remove(i);
          } else if (arg.equals("-n") || arg.equals("--number")) {
             config.display_line_numbers = true;
-            System.out.println("Displaying line numbers.");
+            a.remove(i);
+         } else if (arg.equals("-b") || arg.equals("--number-nonblank")) {
+            config.display_nonblank_lines = true;
             a.remove(i);
          } else if (arg.equals("--")) {
             config.files = new ArrayList<>(a.subList(i + 1, a.size()));
