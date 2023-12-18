@@ -14,6 +14,7 @@ public class Args {
     * -v | --version
     * -n | --number-lines
     * -b | --number-nonblank
+    * -s | --squeeze-blank-lines
     * <files>
     */
    public ArrayList<String>   files;
@@ -21,6 +22,7 @@ public class Args {
    public boolean             display_version;
    public boolean             display_line_numbers;
    public boolean             display_line_numbers_nonblank;
+   public boolean             squeeze_blank_lines;
 
    public Args() {
       files = new ArrayList<>();
@@ -31,6 +33,7 @@ public class Args {
       var config                             = new Args();
       config.display_help                    = false;
       config.display_line_numbers            = false;
+      config.squeeze_blank_lines             = false;
       config.display_version                 = true; // indicates that the app works, just no input file
       config.display_line_numbers_nonblank   = true;
       config.files                           = new ArrayList<>();
@@ -59,6 +62,9 @@ public class Args {
             args.remove(i);
          } else if (arg.equals("-n") || arg.equals("--number")) {
             config.display_line_numbers = true;
+            args.remove(i);
+         } else if (arg.equals("-s") || arg.equals("--squeeze-blank")) {
+            config.squeeze_blank_lines = true;
             args.remove(i);
          } else if (arg.equals("-b") || arg.equals("--number-nonblank")) {
             config.display_line_numbers_nonblank = true;

@@ -40,12 +40,17 @@ public class App {
             try {
                BufferedReader file = Files.newBufferedReader(p);
                int i = 1;
+               int empty = 0;
 
                while (true) {
                   String line = file.readLine();
 
                   if (line == null) break;
 
+                  if (config.squeeze_blank_lines && line.isBlank()) {
+                     if (empty >= 1) continue;
+                     empty++;
+                  }; 
                   if (config.display_line_numbers_nonblank && line.isBlank()) {
                      System.out.println(); 
                      continue;
@@ -77,6 +82,7 @@ public class App {
          "-h, --help               display this help and exit",
          "-n, --number             number all output lines",
          "-b, --number-nonblank    number all nonempty output lines, overrides -n",
+         "-s, --squeeze-nonblank   suppress repeated empty output line",
          "-V, --version            output version information and exit"
       );
 
