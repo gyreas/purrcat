@@ -13,6 +13,7 @@ public class Args {
     * -h | --help
     * -v | --version
     * -n | --number-lines
+    * -b | --number-nonblank
     * <files>
     */
    public ArrayList<String>   files;
@@ -22,7 +23,7 @@ public class Args {
    public boolean             display_nonblank_lines;
 
    public Args() {
-      files = new ArrayList<>();
+      this.files = new ArrayList<>();
    }
 
    /** Return an Args with default values */
@@ -58,9 +59,7 @@ public class Args {
             a.remove(i);
          } else if (arg.equals("-n") || arg.equals("--number")) {
             config.display_line_numbers = true;
-            a.remove(i);
-         } else if (arg.equals("-b") || arg.equals("--number-nonblank")) {
-            config.display_nonblank_lines = true;
+            System.out.println("Displaying line numbers.");
             a.remove(i);
          } else if (arg.equals("--")) {
             config.files = new ArrayList<>(a.subList(i + 1, a.size()));
