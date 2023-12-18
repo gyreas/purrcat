@@ -9,20 +9,37 @@ import java.nio.file.OpenOption;
 import java.util.List;
 
 public class ReadFile {
-   /* Return a file in memory */
    /* TODO: Multiple read method for files: entire file, read functionals*/
-   public static String read_entire_file(String path) {
-      Charset charset = Charset.forName("US-ASCII");
-      Path       file = Paths.get(path);
-      String  content = null;
 
+   /* Return a file in memory */
+   public static Path get_file(String path) {
+      Path       file = Paths.get(path);
+      return file;
+   }
+
+   /* Read entire file to String.
+    *
+    * Useful for when no commondline option was provided.
+    */
+   public static String read_to_string(Path p) {
+      Charset charset = Charset.forName("US-ASCII");
+      String  content = null;
+      
       try {
-         content = Files.readString(file, charset);
+         content = Files.readString(p, charset);
       } catch (IOException x) {
          System.err.format("IOException: %s%n", x);
       }
 
       if (content == null) return ""     ;
       else                 return content; /* file */
+   }
+
+   /* Read a file applying the given function on each line. 
+    *
+    * For now, the functions are specified as String and only one per call.
+    */
+   public static String read_by(Path p, String method) {
+      return "Seriously, I have to read";
    }
 }

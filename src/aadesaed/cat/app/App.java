@@ -3,6 +3,11 @@ package aadesaed.cat.app;
 import static java.lang.System.exit;
 
 import aadesaed.cat.cmdline.Args;
+import aadesaed.cat.input.ReadFile;
+
+import java.io.*;
+import java.nio.file.*;
+import java.util.Formatter;
 
 public class App {
    // TODO: Use a HashTable for this
@@ -30,8 +35,35 @@ public class App {
          print_version(); 
          exit(0); 
       }
+
+      if (a.files.size() == 0) System.out.println();
+      else { 
+         for (String path : a.files) {
+            Path p = ReadFile.get_file(path);
+
+            try {
+               BufferedReader file = Files.newBufferedReader(p);
+               int i = 1;
+               while (true) {
+                  String line = file.readLine();
+                  if (line == null) break;
+                  line = show_line_number(line, i);
+                  System.out.printf(line);
+                  i++;
+               }
+               // System.out.printf("Line: %s\n", line);
+            } catch (IOException x){
+               x.printStackTrace();
+            }
+         }
+      }
    }
 
+   private static String show_line_number(String line, int lineno) {
+      var line_with_no = new Formatter();
+      line_with_no.format("  %d    %s", lineno, line);
+      return line_with_no.toString();
+   }
    private static void print_usage() {
       String usage = String.join(
          newline,

@@ -21,6 +21,7 @@ public class Args {
    public ArrayList<String> files;
 
    public Args() {
+      this.files = new ArrayList<>();
    }
 
    /** Return an Args with default values */
@@ -66,7 +67,7 @@ public class Args {
             System.exit(1);
          } else {
             // TODO: `write` to output stream, no `print`
-            System.out.printf("Everything else.\n");
+            config.files.add(arg);
             a.remove(i);
          }
       }
