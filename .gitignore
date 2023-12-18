@@ -1,3 +1,1 @@
-src/aadesaed/cat/cmdline/ParseArgs.class
-src/aadesaed/cat/cmdline/Args.class
-src/aadesaed/cat/app/App.class
+*.class
