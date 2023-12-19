@@ -54,7 +54,7 @@ public class App {
                   if (config.display_line_numbers_nonblank && line.isBlank()) {
                      System.out.println(); 
                      continue;
-                  } else if (config.display_line_numbers) {
+                  } else if (config.display_line_numbers || config.squeeze_blank_lines) {
                      line = show_line_number(line, i);
                   }
 
