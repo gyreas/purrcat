@@ -6,7 +6,7 @@ It's a toy program to improve my familiarity with the Java ecosystem.
 > **NOTE**: you'll need to have installed the `make` program
 
 1. Clone the repo: `git clone https://github.com/gyreas/purrcat.git`
-2. Enter the dir: cd purrcat/src
+2. Enter the dir: `cd purrcat`
 3. Build with: `make`
 4. Test with: `./app.sh <options & files here>`
 
