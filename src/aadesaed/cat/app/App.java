@@ -7,7 +7,6 @@ import aadesaed.cat.input.ReadFile;
 
 import java.io.*;
 import java.nio.file.*;
-import java.util.Formatter;
 
 public class App {
    private static String program      = "cat";
@@ -69,9 +68,7 @@ public class App {
    }
 
    private static String show_line_number(String line, int lineno) {
-      var line_with_no = new Formatter();
-      line_with_no.format("%6d\t%s", lineno, line);
-      return line_with_no.toString();
+      return String.format("%6d\t%s", lineno, line);
    }
 
    private static void print_usage() {
