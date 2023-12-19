@@ -10,7 +10,6 @@ import java.nio.file.*;
 import java.util.Formatter;
 
 public class App {
-   // TODO: Use a HashTable for this
    private static String program      = "cat";
    private static String license      = "BSD 2.0"; // TODO: read from a file
    private static String version      = "v0.0.1"; // TODO: read from a file
