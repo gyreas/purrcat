@@ -1,38 +1,38 @@
 package aadesaed.cat.tests.thebustle;
 
-import org.testng.annotations.*;
-import static org.testng.Assert.*;
-import java.io.IOException;
-
 import static aadesaed.cat.tests.TESTHelpers.*;
+import static org.testng.Assert.*;
+
 import aadesaed.cat.tests.TestCommand;
+import java.io.IOException;
+import org.testng.annotations.*;
 
 public class TEST_thebustle {
-    private final String BUSTLE  = "thebustle/thebustle.txt";
-    private String testdir       = TESTDIR;
+  private final String BUSTLE = "thebustle/thebustle.txt";
+  private String testdir = TESTDIR;
 
-    @Test(groups = "File", enabled = false)
-    public void works() throws IOException {
-        String p = String.format("%s/%<s.txt", BUSTLE);
-        String expected = readAsIs(p);
+  @Test(groups = "File", enabled = false)
+  public void works() throws IOException {
+    String p = String.format("%s/%<s.txt", BUSTLE);
+    String expected = readAsIs(p);
 
-        TestCommand bustle = new TestCommand(PRG, p);
+    TestCommand bustle = new TestCommand(PRG, p);
 
-        bustle.exec();
-        bustle.assert_output(expected);
-    }
+    bustle.exec();
+    bustle.assert_output(expected);
+  }
 
-    @Test(groups = "File")
-    public void givenRegularInput_whenNoOptions_thenNoExternalCharactersInOutput() 
-    throws IOException {
-        String args = String.format("%s %s", BUSTLE, "" /* options */);
-        String expected = readAsIs(args);
+  @Test(groups = "File")
+  public void givenRegularInput_whenNoOptions_thenNoExternalCharactersInOutput()
+      throws IOException {
+    String args = String.format("%s %s", BUSTLE, "" /* options */);
+    String expected = readAsIs(args);
 
-        TestCommand bustle = new TestCommand(PRG, args);
-        
-        bustle.exec();
-        bustle.assert_output(expected);
-    }
+    TestCommand bustle = new TestCommand(PRG, args);
+
+    bustle.exec();
+    bustle.assert_output(expected);
+  }
 }
 // #[test]
 // fn bustle_nonblank() -> TestResult {
@@ -82,4 +82,3 @@ public class TEST_thebustle {
 //         "tests/expected/the-bustle_stdin_nE.out",
 //     )
 // }
-
