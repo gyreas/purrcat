@@ -27,7 +27,7 @@ run: $(PURR)/app/App.class
 	java aadesaed.cat.app.App
 
 # nah, going with TestNG, since it uses single .jar
-test: TestAll.xml
+test: $(PURR)/app/App.class 
 	@printf "Setting up the test environment.\n"
 	@TESTPATH=$(TESTPATH) $(TESTPATH)/mk-outs.rb
 	@printf "Done.\n\n"
@@ -40,7 +40,7 @@ test: TestAll.xml
 
 clean:
 	@# Cleaning class files
-	fd . -e class -x rm {}
+	fd . -e class -I -x rm {}
 	@# Removing test results
 	rm -rf test-output/
 	@# Clean up the environment
