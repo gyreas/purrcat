@@ -1,3 +1,8 @@
 /lib
 src/aadesaed/cat/**/*.class
-src/aadesaed/cat/tests
+#src/aadesaed/cat/tests
+/docs
+.idea
+out/production/purrcat/src/aadesaed/cat/tests/expected
+src/aadesaed/cat/tests/expected
+test-output
