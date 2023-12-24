@@ -37,7 +37,8 @@ public class TestCommand {
     ArrayList<String> cmdline = new ArrayList<>(Arrays.asList(this.args));
     cmdline.add(0, PRG);
 
-    System.out.printf("COMMAND: '%s', ARGS: '%s' \n", PRG, Arrays.toString(args));
+    System.out.printf("COMMAND: '%s'\n", PRG);
+    System.out.printf("ARGS: '%s' \n", Arrays.toString(args));
     linebr();
 
     ProcessBuilder pb = new ProcessBuilder(cmdline);
@@ -59,6 +60,6 @@ public class TestCommand {
   public void assert_output(String expected) {
     String msg =
         String.format("Expected: \n<%s>\n", expected) + String.format("Got: \n<%s>\n", this.out);
-    assertEquals(this.out, expected);
+    assertEquals(this.out, expected, msg);
   }
 }
