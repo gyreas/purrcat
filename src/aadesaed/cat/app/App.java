@@ -60,7 +60,7 @@ public class App {
             System.out.printf("%s\n", line);
             i++;
           }
-          // System.out.printf("Line: %s\n", line);
+          file.close();
         } catch (IOException x) {
           x.printStackTrace();
         }
