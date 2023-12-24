@@ -6,10 +6,13 @@ import static org.testng.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TestCommand {
   String command;
   String out;
+  // TODO: Use array list here
   String[] args;
 
   public TestCommand(String command, String arg) {
@@ -31,12 +34,13 @@ public class TestCommand {
   }
 
   public void exec() {
-    String args = cat_args();
+    ArrayList<String> cmdline = new ArrayList<>(Arrays.asList(this.args));
+    cmdline.add(0, PRG);
 
-    System.out.printf("COMMAND: '%s', ARGS: '%s' \n", PRG, args);
+    System.out.printf("COMMAND: '%s', ARGS: '%s' \n", PRG, Arrays.toString(args));
     linebr();
 
-    ProcessBuilder pb = new ProcessBuilder(PRG, args);
+    ProcessBuilder pb = new ProcessBuilder(cmdline);
     pb.directory(new File(TESTDIR));
     pb.redirectErrorStream(true);
     try {

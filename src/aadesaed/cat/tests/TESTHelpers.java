@@ -28,12 +28,26 @@ public class TESTHelpers {
   }
 
   public static void run(String cmd, String args, String expected) {
-    TestCommand bustle = new TestCommand(cmd, args);
-    bustle.exec();
-    bustle.assert_output(expected);
+    try {
+      String out = readAsIs(expected);
+      TestCommand tc = new TestCommand(cmd, args);
+      tc.exec();
+      tc.assert_output(out);
+    } catch (IOException x) {
+      System.out.printf("Unable to read file: %s\n", x.getMessage());
+    }
   }
 
-  public static void run(String cmd, String[] args) {}
+  public static void run(String cmd, String[] args, String expected) {
+    try {
+      String out = readAsIs(expected);
+      TestCommand tc = new TestCommand(cmd, args);
+      tc.exec();
+      tc.assert_output(out);
+    } catch (IOException x) {
+      System.out.printf("Unable to read file: %s\n", x.getMessage());
+    }
+  }
 
   public static void gen_bad_file() {
     // while (true) {

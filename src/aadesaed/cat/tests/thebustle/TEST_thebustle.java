@@ -13,18 +13,21 @@ public class TEST_thebustle {
 
   @Test(groups = "File", enabled = false)
   public void works() throws IOException {
-    String p = String.format("%s/%<s.txt", BUSTLE);
-    String expected = readAsIs(p);
-
-    TestCommand bustle = new TestCommand(PRG, p);
-
-    bustle.exec();
-    bustle.assert_output(expected);
+    run(PRG, BUSTLE, "expected/thebustle.out");
   }
 
-  @Test(groups = "File")
-  public void givenRegularInput_whenNoOptions_thenNoExternalCharactersInOutput()
-      throws IOException {
+  @Test(groups = "File", enabled = true)
+  public void bustle_nonblank() {
+    run(PRG, new String[] {"-b", BUSTLE}, "expected/thebustle_b.out");
+  }
+
+  @Test(groups = "File", enabled = true)
+  public void givenAFile_whenShowLineNumber_thenPrependLinesWithLineNumbers() {
+    run(PRG, new String[] {"-n", BUSTLE}, "expected/thebustle_n.out");
+  }
+
+  @Test(groups = "File", enabled = true)
+  public void givenAFile_whenNoOptions_thenNoExternalCharactersInOutput() throws IOException {
     String args = String.format("%s %s", BUSTLE, "" /* options */);
     String expected = readAsIs(args);
 
@@ -34,11 +37,6 @@ public class TEST_thebustle {
     bustle.assert_output(expected);
   }
 }
-// #[test]
-// fn bustle_nonblank() -> TestResult {
-//     run(&["-b", BUSTLE], "tests/expected/the-bustle_b.out")
-// }
-
 // #[test]
 // fn bustle_number() -> TestResult {
 //    run_stdin(
