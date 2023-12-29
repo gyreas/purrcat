@@ -3,7 +3,6 @@ package aadesaed.cat.tests.thebustle;
 import static aadesaed.cat.tests.TESTHelpers.*;
 import static org.testng.Assert.*;
 
-import aadesaed.cat.tests.TestCommand;
 import java.io.IOException;
 import org.testng.annotations.*;
 
