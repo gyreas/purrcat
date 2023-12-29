@@ -68,8 +68,16 @@ public class App {
     }
   }
 
+  private static boolean has_line(String line_ish) {
+    return line_ish.contains("\n") || line_ish.contains("\r") ;
+    
+  }
   private static String show_line_number(String line, int lineno) {
     return String.format("%6d\t%s", lineno, line);
+  }
+
+  private static String show_tab_char(String line) {
+    return line.replace("\t", "^M");
   }
 
   private static void print_usage() {
@@ -81,6 +89,7 @@ public class App {
             "-n, --number             number all output lines",
             "-b, --number-nonblank    number all nonempty output lines, overrides -n",
             "-s, --squeeze-nonblank   suppress repeated empty output line",
+            "-T, --show-tabs          display TAB characters as ^I",
             "-V, --version            output version information and exit");
 
     System.out.printf("%s\n", usage);
