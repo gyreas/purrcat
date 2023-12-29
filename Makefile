@@ -15,7 +15,7 @@ TESTRUNNER := org.testng.TestNG
 TESTPATH   := $(PURR)/tests
 
 # needed for compilation
-DEPS        := $(PURR)/app/App.java $(PURR)/cmdline/Args.java $(PURR)/input/ReadFile.java
+DEPS        := $(addprefix $(PURR)/,app/App.java cmdline/Args.java input/ReadFile.java)
 CLASSPATH   := $(subst $(space),:,$(addprefix lib/,$(JARS)))
 
 $(PURR)/app/App.class: $(DEPS)
@@ -24,7 +24,7 @@ $(PURR)/app/App.class: $(DEPS)
 	@printf "Done.\n"
 
 run: $(PURR)/app/App.class
-	java aadesaed.cat.app.App
+	java -cp src/ aadesaed.cat.app.App
 
 # nah, going with TestNG, since it uses single .jar
 test: $(PURR)/app/App.class 
@@ -32,7 +32,6 @@ test: $(PURR)/app/App.class
 	@TESTPATH=$(TESTPATH) $(TESTPATH)/mk-outs.rb
 	@printf "Done.\n\n"
 	@printf "Running tests..."
-	@sleep 0.2
 	@printf "\n-----------------------------------------------\n"
 	@javac -cp $(SRC):$(CLASSPATH) $(TESTALL)
 	@java -cp $(SRC):$(CLASSPATH) org.testng.TestNG -log 1 TestAll.xml 2> /dev/null
@@ -45,4 +44,3 @@ clean:
 	rm -rf test-output/
 	@# Clean up the environment
 	rm -rf $(TESTPATH)/expected/*
-
