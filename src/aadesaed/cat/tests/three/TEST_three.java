@@ -7,33 +7,34 @@ import java.io.IOException;
 import org.testng.annotations.*;
 
 public class TEST_three {
-  private final String three = "three/three.txt";
+  private final String THREE = "three/three.txt";
   private String testdir = TESTDIR;
 
-  @Test(groups = "File", enabled = false)
-  public void works() throws IOException {
-    run(PRG, three, "expected/three.out");
+  @Test(groups = "File", enabled = true)
+  public void givenAFileWithDifferentEOLs_whenNoOptions_thenPreserveEOLs() throws IOException {
+    run(PRG, THREE, "expected/three.out");
   }
 
   @Test(groups = "File", enabled = true)
-  public void three_nonblank() {
-    run(PRG, new String[] {"-b", three}, "expected/three_b.out");
-  }
-
-  @Test(groups = "File") // , enabled = true)
-  public void givenAFile_whenShowLineNumber_thenPrependLinesWithLineNumbers() {
-    run(PRG, new String[] {"-n", three}, "expected/three_n.out");
+  public void
+      givenAFileWithDifferentEOLs_whenNumberOnlyNonblankLines_thenPrependNonblankLinesWithLineNumbers() {
+    run(PRG, new String[] {"-b", THREE}, "expected/three_b.out");
   }
 
   @Test(groups = "File", enabled = true)
-  public void givenAFile_whenNoOptions_thenNoExternalCharactersInOutput() throws IOException {
-    String args = String.format("%s %s", three, "" /* options */);
-    String expected = readAsIs(args);
+  public void
+      givenAFileWithDifferentEOLs_whenShowLineNumber_thenPrependLinesWithLineNumbersPreserveEOLs() {
+    run(PRG, new String[] {"-n", THREE}, "expected/three_n.out");
+  }
 
-    TestCommand three = new TestCommand(PRG, args);
+  @Test(groups = "File", enabled = true)
+  public void givenAFile_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine() {
+    run(PRG, new String[] {"-s", THREE}, "expected/three_s.out");
+  }
 
-    three.exec();
-    three.assert_output(expected);
+  @Test(groups = "File", enabled = true)
+  public void givenAFile_whenShowTabs_thenAllNonprintingTabsBecomeCaretM() {
+    run(PRG, new String[] {"-T", THREE}, "expected/three_T.out");
   }
 }
 // #[test]

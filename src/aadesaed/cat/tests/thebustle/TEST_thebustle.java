@@ -10,13 +10,14 @@ public class TEST_thebustle {
   private final String BUSTLE = "thebustle/thebustle.txt";
   private String testdir = TESTDIR;
 
-  @Test(groups = "File", enabled = false)
-  public void works() throws IOException {
+  @Test(groups = "File", enabled = true)
+  public void givenAFile_whenNoOptions_thenNoExternalCharactersInOutput() throws IOException {
     run(PRG, BUSTLE, "expected/thebustle.out");
   }
 
   @Test(groups = "File", enabled = true)
-  public void bustle_nonblank() {
+  public void
+      givenAFileWithDifferentEOLs_whenNumberOnlyNonblankLines_thenPrependNonblankLinesWithLineNumbers() {
     run(PRG, new String[] {"-b", BUSTLE}, "expected/thebustle_b.out");
   }
 
@@ -26,14 +27,13 @@ public class TEST_thebustle {
   }
 
   @Test(groups = "File", enabled = true)
-  public void givenAFile_whenNoOptions_thenNoExternalCharactersInOutput() throws IOException {
-    String args = String.format("%s %s", BUSTLE, "" /* options */);
-    String expected = readAsIs(args);
+  public void givenAFile_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine() {
+    run(PRG, new String[] {"-s", BUSTLE}, "expected/thebustle_s.out");
+  }
 
-    TestCommand bustle = new TestCommand(PRG, args);
-
-    bustle.exec();
-    bustle.assert_output(expected);
+  @Test(groups = "File", enabled = true)
+  public void givenAFile_whenShowTabs_thenAllNonprintingTabsBecomeCaretM() {
+    run(PRG, new String[] {"-T", BUSTLE}, "expected/thebustle_T.out");
   }
 }
 // #[test]

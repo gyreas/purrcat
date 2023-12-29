@@ -7,33 +7,33 @@ import java.io.IOException;
 import org.testng.annotations.*;
 
 public class TEST_spiders {
-  private final String spiders = "spiders/spiders.txt";
+  private final String SPIDERS = "spiders/spiders.txt";
   private String testdir = TESTDIR;
-
-  @Test(groups = "File", enabled = false)
-  public void works() throws IOException {
-    run(PRG, spiders, "expected/spiders.out");
-  }
-
-  @Test(groups = "File", enabled = true)
-  public void spiders_nonblank() {
-    run(PRG, new String[] {"-b", spiders}, "expected/spiders_b.out");
-  }
-
-  @Test(groups = "File") // , enabled = true)
-  public void givenAFile_whenShowLineNumber_thenPrependLinesWithLineNumbers() {
-    run(PRG, new String[] {"-n", spiders}, "expected/spiders_n.out");
-  }
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenNoOptions_thenNoExternalCharactersInOutput() throws IOException {
-    String args = String.format("%s %s", spiders, "" /* options */);
-    String expected = readAsIs(args);
+    run(PRG, SPIDERS, "expected/spiders.out");
+  }
 
-    TestCommand spiders = new TestCommand(PRG, args);
+  @Test(groups = "File", enabled = true)
+  public void
+      givenAFileWithDifferentEOLs_whenNumberOnlyNonblankLines_thenPrependNonblankLinesWithLineNumbers() {
+    run(PRG, new String[] {"-b", SPIDERS}, "expected/thebustle_b.out");
+  }
 
-    spiders.exec();
-    spiders.assert_output(expected);
+  @Test(groups = "File", enabled = true)
+  public void givenAFile_whenShowLineNumber_thenPrependLinesWithLineNumbers() {
+    run(PRG, new String[] {"-n", SPIDERS}, "expected/spiders_n.out");
+  }
+
+  @Test(groups = "File", enabled = true)
+  public void givenAFile_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine() {
+    run(PRG, new String[] {"-s", SPIDERS}, "expected/spiders_s.out");
+  }
+
+  @Test(groups = "File", enabled = true)
+  public void givenAFile_whenShowTabs_thenAllNonprintingTabsBecomeCaretM() {
+    run(PRG, new String[] {"-T", SPIDERS}, "expected/spiders_T.out");
   }
 }
 // #[test]
