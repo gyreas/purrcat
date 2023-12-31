@@ -18,7 +18,7 @@ public class TEST_spiders {
   @Test(groups = "File", enabled = true)
   public void
       givenAFileWithDifferentEOLs_whenNumberOnlyNonblankLines_thenPrependNonblankLinesWithLineNumbers() {
-    run(PRG, new String[] {"-b", SPIDERS}, "expected/thebustle_b.out");
+    run(PRG, new String[] {"-b", SPIDERS}, "expected/spiders_b.out");
   }
 
   @Test(groups = "File", enabled = true)
