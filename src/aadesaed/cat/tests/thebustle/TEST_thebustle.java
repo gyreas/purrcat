@@ -32,7 +32,7 @@ public class TEST_thebustle {
   }
 
   @Test(groups = "File", enabled = true)
-  public void givenAFile_whenShowTabs_thenAllNonprintingTabsBecomeCaretM() {
+  public void givenAFile_whenShowTabs_thenAllNonprintingTabsBecomeCaretI() {
     run(PRG, new String[] {"-T", BUSTLE}, "expected/thebustle_T.out");
   }
 }

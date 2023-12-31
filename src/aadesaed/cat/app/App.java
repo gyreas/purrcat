@@ -77,7 +77,7 @@ public class App {
   }
 
   private static String show_tab_char(String line) {
-    return line.replace("\t", "^M");
+    return line.replace("\t", "^I");
   }
 
   private static void print_usage() {
