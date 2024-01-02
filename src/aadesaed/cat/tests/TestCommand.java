@@ -37,9 +37,8 @@ public class TestCommand {
     ArrayList<String> cmdline = new ArrayList<>(Arrays.asList(this.args));
     cmdline.add(0, PRG);
 
-    System.out.printf("COMMAND: '%s'\n", PRG);
     System.out.printf("ARGS: '%s' \n", Arrays.toString(args));
-    linebr();
+    System.out.println();
 
     ProcessBuilder pb = new ProcessBuilder(cmdline);
     pb.directory(new File(TESTDIR));

@@ -77,10 +77,12 @@ public class Args {
         config.files = new ArrayList<>(args.subList(i + 1, args.size()));
         return config;
       } else if (arg.startsWith("-")) {
-        System.out.printf("Unknown options: %s.\n", arg);
+        System.out.printf(
+            "purrcat: '%s' is an invalid options.\n",
+            arg.startsWith("--") ? arg.replaceFirst("--", "") : arg.replaceFirst("-", ""));
+        System.out.println("Try 'purrcat --help' for available options.");
         System.exit(1);
       } else {
-        // TODO: `write` to output stream, no `print`
         config.files.add(arg);
         args.remove(i);
       }

@@ -3,7 +3,6 @@ package aadesaed.cat.tests.consistent;
 import static aadesaed.cat.tests.TESTHelpers.*;
 import static org.testng.Assert.*;
 
-import java.io.IOException;
 import org.testng.annotations.*;
 
 public class TEST_consistent {
@@ -11,12 +10,12 @@ public class TEST_consistent {
   private String testdir = TESTDIR;
 
   @Test(groups = "File", enabled = true)
-  public void givenAFile_whenNoOptions_thenNoExternalCharactersInOutput() throws IOException {
-    run(PRG, CONSISTENT, "expected/consistent_n.out");
+  public void givenAFile_whenNoOptions_thenNoExternalCharactersInOutput() {
+    run(PRG, CONSISTENT, "expected/consistent.out");
   }
 
   @Test(groups = "File", enabled = true)
-  public void givenAFile_whenNumberOnlyNonblankLines_thenFileRemainsEmpty() {
+  public void givenAFile_whenNumberOnlyNonblankLines_thenNumberOnlyNonblankLines() {
     run(PRG, new String[] {"-b", CONSISTENT}, "expected/consistent_b.out");
   }
 
