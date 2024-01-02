@@ -13,6 +13,7 @@ TESTALL    := $(shell fd . -e java $(TESTPATH))
 TESTPKG    := aadesaed.cat.tests
 TESTRUNNER := org.testng.TestNG
 TESTPATH   := $(PURR)/tests
+LOG        := test.log
 
 # needed for compilation
 DEPS        := $(addprefix $(PURR)/,app/App.java cmdline/Args.java input/ReadFile.java)
@@ -33,8 +34,8 @@ test: $(PURR)/app/App.class
 	@printf "Done.\n\n"
 	@printf "Running tests..."
 	@printf "\n-----------------------------------------------\n"
-	@javac -cp $(SRC):$(CLASSPATH) $(TESTALL)
-	@java -cp $(SRC):$(CLASSPATH) org.testng.TestNG -log 1 TestAll.xml 2> /dev/null
+	@javac -Werror -cp $(SRC):$(CLASSPATH) $(TESTALL)
+	@java -cp $(SRC):$(CLASSPATH) org.testng.TestNG -log 1 TestAll.xml 2> $(LOG)
 	@echo "OK!"
 
 clean:

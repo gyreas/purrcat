@@ -3,11 +3,13 @@
 <suite name="Suite" verbose="1" >
   <test name="Testing">
     <classes>
-      <class name="aadesaed.cat.tests.empty.TEST_empty"/>
-      <class name="aadesaed.cat.tests.fox.TEST_fox"/>
-      <class name="aadesaed.cat.tests.spiders.TEST_spiders"/>
-      <class name="aadesaed.cat.tests.thebustle.TEST_thebustle"/>
       <class name="aadesaed.cat.tests.three.TEST_three"/>
+      <class name="aadesaed.cat.tests.thebustle.TEST_thebustle"/>
+      <class name="aadesaed.cat.tests.empty.TEST_empty"/> 
+      <class name="aadesaed.cat.tests.dummy.TEST_dummy"/> 
+      <class name="aadesaed.cat.tests.spiders.TEST_spiders"/>
+      <class name="aadesaed.cat.tests.fox.TEST_fox"/>
+      <class name="aadesaed.cat.tests.consistent.TEST_consistent"/>
     </classes>
   </test>
 </suite>

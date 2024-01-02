@@ -12,7 +12,7 @@ public class TEST_empty {
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenNoOptions_thenNoExternalCharactersInOutput() throws IOException {
-    run(PRG, EMPTY, "expected/empty_n.out");
+    run(PRG, EMPTY, "expected/empty.out");
   }
 
   @Test(groups = "File", enabled = true)
