@@ -1,0 +1,10 @@
+This is any large file with many lines of text, currently it's 100k+ lines of text. Here's one way to generate it:
+  ```
+  $ touch consistent.txt
+  $ for ((i=0; i < 47; i++)); do cat file1 file2 ... >> consistent.txt; done
+  ```
+For starters you can simply use app/App.java since it's long enough, but it's probably best to mix some other files too.
+
+While binary files can now be catenated, there are still rough edges. Testing on files 1Mib to 5Mib large should be quick enough to see results.
+
+This file is not meant to be committed beyond this first addition.
