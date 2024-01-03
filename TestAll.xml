@@ -10,6 +10,10 @@
       <class name="aadesaed.cat.tests.spiders.TEST_spiders"/>
       <class name="aadesaed.cat.tests.fox.TEST_fox"/>
       <class name="aadesaed.cat.tests.consistent.TEST_consistent"/>
+      <class name="aadesaed.cat.tests.tabbed.TEST_tabbed"/>
+      <class name="aadesaed.cat.app.App">
+        <methods> <include name="can_Find_Tab_In_Buffer"/> </methods>
+      </class>
     </classes>
   </test>
 </suite>

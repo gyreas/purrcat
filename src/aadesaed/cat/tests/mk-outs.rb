@@ -3,6 +3,7 @@
 projectdir = Dir.pwd
 root       = ENV["TESTPATH"]
 outdir     = "expected"
+all        = "thebustle empty fox spiders three consistent dummy tabbed"
 
 # Enter test directory
 Dir.chdir root

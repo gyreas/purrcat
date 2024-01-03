@@ -36,6 +36,7 @@ test: $(PURR)/app/App.class
 	@printf "\n-----------------------------------------------\n"
 	@javac -Werror -cp $(SRC):$(CLASSPATH) $(TESTALL)
 	@java -cp $(SRC):$(CLASSPATH) org.testng.TestNG -log 1 TestAll.xml 2> $(LOG)
+	@printf "\n-----------------------------------------------\n"
 	@echo "OK!"
 
 clean:
