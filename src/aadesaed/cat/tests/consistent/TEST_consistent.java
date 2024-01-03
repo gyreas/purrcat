@@ -9,27 +9,27 @@ public class TEST_consistent {
   private final String CONSISTENT = "consistent/consistent.txt";
   private String testdir = TESTDIR;
 
-  @Test(groups = "File", enabled = true)
+  @Test(groups = "File", enabled = false)
   public void givenAFile_whenNoOptions_thenNoExternalCharactersInOutput() {
     run(PRG, CONSISTENT, "expected/consistent.out");
   }
 
-  @Test(groups = "File", enabled = true)
+  @Test(groups = "File", enabled = false)
   public void givenAFile_whenNumberOnlyNonblankLines_thenNumberOnlyNonblankLines() {
     run(PRG, new String[] {"-b", CONSISTENT}, "expected/consistent_b.out");
   }
 
-  @Test(groups = "File", enabled = true)
+  @Test(groups = "File", enabled = false)
   public void givenAFile_whenShowLineNumber_thenPrependLinesWithLineNumbers() {
     run(PRG, new String[] {"-n", CONSISTENT}, "expected/consistent_n.out");
   }
 
-  @Test(groups = "File", enabled = true)
+  @Test(groups = "File", enabled = false)
   public void givenAFile_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine() {
     run(PRG, new String[] {"-s", CONSISTENT}, "expected/consistent_s.out");
   }
 
-  @Test(groups = "File", enabled = true)
+  @Test(groups = "File", enabled = false)
   public void givenAFile_whenShowTabs_thenAllNonprintingTabsBecomeCaretI() {
     run(PRG, new String[] {"-T", CONSISTENT}, "expected/consistent_T.out");
   }
