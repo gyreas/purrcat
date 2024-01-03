@@ -1,12 +1,14 @@
 package aadesaed.cat.app;
 
 import static java.lang.System.exit;
+import static org.testng.Assert.*;
 
 import aadesaed.cat.cmdline.Args;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.nio.file.*;
+import org.testng.annotations.*;
 
 public class App {
 
@@ -70,6 +72,7 @@ public class App {
     }
     if (config.files.size() == 0) System.out.println();
     else {
+      // TODO: combine this with Args.java to eliminate duplicate code
       Numbering_Mode mode;
       if (config.display_line_numbers && !config.display_line_numbers_nonblank)
         mode = Numbering_Mode.All;
@@ -191,30 +194,49 @@ public class App {
     writer.write(line.getBytes());
   }
 
+  private static int find_Tab_In_Buffer(ByteBuffer buffer) {
+    int len = buffer.remaining();
+    for (int i = 0; i < len; i++) {
+      byte b = buffer.get(i);
+      if (b == '\n' || b == '\t' || b == '\r') {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  @Test(groups = "Methods", enabled = true)
+  public void can_Find_Tab_In_Buffer() {
+    System.out.println("[Can find tab in buffer]");
+    ByteBuffer buf = ByteBuffer.wrap("A\ttab".getBytes());
+    assertNotSame(find_Tab_In_Buffer(buf), -1, "There's a tab in there.");
+  }
+
   private static int write_Tab_To_End(WritableByteChannel writer, ByteBuffer in_Buf)
       throws IOException {
     int count = 0;
     int len = in_Buf.remaining();
-    for (int i = 0; i < len; i++) {
-      char b = (char) in_Buf.get(i);
-      if (b == '\n' || b == '\t' || b == '\r') {
-        writer.write(in_Buf.slice(0, i));
+    while (true) {
+      int pos = find_Tab_In_Buffer(in_Buf);
+      if (pos != -1) {
+        byte b = in_Buf.get(pos);
+        writer.write(in_Buf.slice(0, pos));
         if (b == '\t') {
           System.out.write("^I".getBytes());
-          count += i + 1;
+          count += pos + 1;
         } else {
           // 10 ('\n') or 13 ('\r')
-          return count + i;
+          return count + pos;
         }
         // Update in_Buf to the remaining part
-        in_Buf = in_Buf.slice(0, len - i - 1);
-        len = in_Buf.remaining();
+        len -= pos + 1;
+        in_Buf = in_Buf.slice(pos + 1, len);
+      } else {
+        // No newline or tab found, write the entire buffer
+        writer.write(in_Buf);
+        return len;
       }
     }
-    // No newline or tab found, write the entire buffer
-    writer.write(in_Buf);
-
-    return len;
   }
 
   private static int write_To_End(WritableByteChannel writer, ByteBuffer buf) throws IOException {
