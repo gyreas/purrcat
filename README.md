@@ -12,7 +12,7 @@ It's a toy program to improve my familiarity with the Java ecosystem.
 
 ### TODO
 - [x] implement tiny testing library / find a tiny library jar
-- [ ] add the main branch after test suites is up
+- [x] add the main branch after test suites is up
 - [x] implement file i/o etc
 - [x] implement feature's of Unix cat, so that this cat can purr.
 - [ ] use functional programming techniques, ie, implement each feature as a 
