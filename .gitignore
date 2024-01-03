@@ -3,7 +3,6 @@
 /docs
 /lib
 /out
-src/aadesaed/cat/**/*.class
 *.class
 src/aadesaed/cat/tests/expected
 test-output
