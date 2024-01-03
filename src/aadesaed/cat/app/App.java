@@ -1,29 +1,32 @@
 package aadesaed.cat.app;
 
 import static java.lang.System.exit;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertNotSame;
 
 import aadesaed.cat.cmdline.Args;
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.ByteBuffer;
-import java.nio.channels.*;
-import java.nio.file.*;
-import org.testng.annotations.*;
+import java.nio.channels.Channels;
+import java.nio.channels.FileChannel;
+import java.nio.channels.WritableByteChannel;
+import org.testng.annotations.Test;
 
 public class App {
 
-  private static String program = "cat";
-  private static String license = "MPL-2.0"; // TODO: read from a file
-  private static String version = "v0.0.2"; // TODO: read from a file
-  private static String author = "Saheed Adeleye";
-  private static String author_email = "aadesaed@tuta.io";
-  private static String newline = System.getProperty("line.separator");
+  private static final String PROGRAM = "cat";
+  private static final String LICENSE = "MPL-2.0"; // TODO: read from a file
+  private static final String VERSION = "v0.0.2"; // TODO: read from a file
+  private static final String AUTHOR = "Saheed Adeleye";
+  private static final String AUTHOR_EMAIL = "aadesaed@tuta.io";
+  private static final String NEWLINE = System.lineSeparator();
 
   private enum Numbering_Mode {
     None,
     All,
     Non_Blank,
-  };
+  }
 
   private static class OutputState {
     int line_Number = 1;
@@ -70,7 +73,7 @@ public class App {
       print_version();
       exit(0);
     }
-    if (config.files.size() == 0) System.out.println();
+    if (config.files.isEmpty()) System.out.println();
     else {
       // TODO: combine this with Args.java to eliminate duplicate code
       Numbering_Mode mode;
@@ -85,6 +88,7 @@ public class App {
       var files = config.files;
       for (var file : files) {
         OutputState state = new OutputState();
+        // TODO: fix resource usage in this class
         FileChannel reader = new FileInputStream(file).getChannel();
         write_Lines(reader, state, options);
       }
@@ -94,64 +98,60 @@ public class App {
   // TODO: This is it don't get scared now
   private static void write_Lines(FileChannel handle, OutputState state, OutputOptions options)
       throws IOException {
-    try {
-      int buf_Size = 1024 * 31;
-      PrintStream out = System.out;
-      WritableByteChannel writer = Channels.newChannel(out);
-      ByteBuffer in_Buf = ByteBuffer.allocate(buf_Size);
+    int buf_Size = 1024 * 31;
+    PrintStream out = System.out;
+    WritableByteChannel writer = Channels.newChannel(out);
+    ByteBuffer in_Buf = ByteBuffer.allocate(buf_Size);
 
-      // each read
-      int amt_Read = handle.read(in_Buf);
-      while (amt_Read != -1) {
-        // go through the buffer
-        int pos = 0; // position of the current char
-        while (pos < amt_Read) {
-          byte b = in_Buf.get(pos);
-          // skip empty line_Number, enumerating them if possible
-          if (state.skipped_Carriage_Return) {
-            out.write((byte) '\r');
-            state.skipped_Carriage_Return = false;
-            state.at_Line_Start = false;
-          }
-
-          if (b == (byte) '\n') {
-            write_New_Line(out, state, options);
-            pos++;
-            state.at_Line_Start = true;
-            continue;
-          }
-
-          state.one_Blank_Kept = false;
-          if (state.at_Line_Start && options.number != Numbering_Mode.None) {
-            write_Line_Number(out, state.line_Number);
-            state.line_Number++;
-          }
-
-          // // dump everything else
-          int len = amt_Read - pos;
-          // slicing is relative to zero index of the buffer, not relative to the current position
-          int offset = write_End(writer, in_Buf.slice(pos, len), options);
-          // end of buffer?
-          if (pos + offset == amt_Read) {
-            state.at_Line_Start = false;
-            break;
-          }
-          if (in_Buf.get(pos + offset) == '\r') {
-            state.skipped_Carriage_Return = true;
-          } else {
-            write_End_Of_Line(out, options.end_Of_Line().getBytes());
-            state.at_Line_Start = true;
-          }
-          pos += offset + 1;
+    // each read
+    int amt_Read = handle.read(in_Buf);
+    while (amt_Read != -1) {
+      // go through the buffer
+      int pos = 0; // position of the current char
+      while (pos < amt_Read) {
+        byte b = in_Buf.get(pos);
+        // skip empty line_Number, enumerating them if possible
+        if (state.skipped_Carriage_Return) {
+          out.write('\r');
+          state.skipped_Carriage_Return = false;
+          state.at_Line_Start = false;
         }
-        in_Buf.clear();
-        amt_Read = handle.read(in_Buf);
-        out.flush();
+
+        if (b == '\n') {
+          write_New_Line(out, state, options);
+          pos++;
+          state.at_Line_Start = true;
+          continue;
+        }
+
+        state.one_Blank_Kept = false;
+        if (state.at_Line_Start && options.number != Numbering_Mode.None) {
+          write_Line_Number(out, state.line_Number);
+          state.line_Number++;
+        }
+
+        // // dump everything else
+        int len = amt_Read - pos;
+        // slicing is relative to zero index of the buffer, not relative to the current position
+        int offset = write_End(writer, in_Buf.slice(pos, len), options);
+        // end of buffer?
+        if (pos + offset == amt_Read) {
+          state.at_Line_Start = false;
+          break;
+        }
+        if (in_Buf.get(pos + offset) == '\r') {
+          state.skipped_Carriage_Return = true;
+        } else {
+          write_End_Of_Line(out, options.end_Of_Line().getBytes());
+          state.at_Line_Start = true;
+        }
+        pos += offset + 1;
       }
-      handle.close();
-    } catch (IOException x) {
-      x.printStackTrace();
+      in_Buf.clear();
+      amt_Read = handle.read(in_Buf);
+      out.flush();
     }
+    handle.close();
   }
 
   private static void write_End_Of_Line(PrintStream writer, byte[] end_Of_Line) throws IOException {
@@ -161,10 +161,11 @@ public class App {
   private static int write_End(WritableByteChannel writer, ByteBuffer buf, OutputOptions options)
       throws IOException {
     int amt;
-    if (options.show_Nonprint) {
-      System.exit(1);
-      amt = 0; // write_nonprint_to_end(in_buf, writer, options.tab().as_bytes())
-    } else if (options.show_Tabs) {
+    // if (options.show_Nonprint) {
+    //   System.exit(1);
+    //   amt = 0; // write_nonprint_to_end(in_buf, writer, options.tab().as_bytes())
+    // } else
+    if (options.show_Tabs) {
       amt = write_Tab_To_End(writer, buf);
     } else {
       amt = write_To_End(writer, buf);
@@ -205,7 +206,7 @@ public class App {
     return -1;
   }
 
-  @Test(groups = "Methods", enabled = true)
+  @Test(enabled = true)
   public void can_Find_Tab_In_Buffer() {
     System.out.println("[Can find tab in buffer]");
     ByteBuffer buf = ByteBuffer.wrap("A\ttab".getBytes());
@@ -243,7 +244,7 @@ public class App {
     int len = buf.remaining();
     for (int i = 0; i < len; i++) {
       byte b = buf.get(i);
-      if (b == (byte) '\n' || b == (byte) '\r') {
+      if (b == '\n' || b == '\r') {
         writer.write(buf.slice(0, i));
         return i;
       }
@@ -277,7 +278,7 @@ public class App {
   private static void print_usage() {
     String usage =
         String.join(
-            newline,
+            NEWLINE,
             app_meta(),
             "-h, --help               display this help and exit",
             "-n, --number             number all output lines",
@@ -290,15 +291,11 @@ public class App {
   }
 
   private static String app_meta() {
-    StringBuilder app_meta = new StringBuilder();
-    app_meta.append(String.format("Author: %s <%s>\n", author, author_email));
-    app_meta.append(String.format("License: %s\n", license));
-    return app_meta.toString();
+    return String.format("Author: %s <%s>\n", AUTHOR, AUTHOR_EMAIL)
+        + String.format("License: %s\n", LICENSE);
   }
 
   private static void print_version() {
-    StringBuilder version_ = new StringBuilder();
-    version_.append(String.format("%s %s\n", program, version));
-    System.out.printf("%s", version_);
+    System.out.printf("%s", String.format("%s %s\n", PROGRAM, VERSION));
   }
 }
