@@ -78,7 +78,7 @@ public class Args {
         return config;
       } else if (arg.startsWith("-")) {
         System.out.printf(
-            "purrcat: '%s' is an invalid options.\n",
+            "purrcat: '%s' is an invalid option.\n",
             arg.startsWith("--") ? arg.replaceFirst("--", "") : arg.replaceFirst("-", ""));
         System.out.println("Try 'purrcat --help' for available options.");
         System.exit(1);
