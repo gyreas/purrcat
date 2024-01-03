@@ -1,16 +1,35 @@
 #!/usr/bin/env -S ruby -w
-
 projectdir = Dir.pwd
+gitdir     = "#{projectdir}/.git"
 root       = ENV["TESTPATH"]
 outdir     = "expected"
 all        = "thebustle empty fox spiders three consistent dummy tabbed"
 
 # Enter test directory
-Dir.chdir root
+if !root.nil?
+  Dir.chdir root
+else
+  STDERR.puts "Not in tests directory."
+  Kernel.exit 1
+end
 
 if not File.directory? outdir
   `mkdir -p #{outdir}`
 end 
+
+# generate a large file for consistency check
+consistent = "consistent/consistent.txt"
+
+# backup the template
+tmp = "#{consistent}.tmp"
+if File.size?(consistent) < 1024 
+  File.copy_stream(consistent, tmp)
+  size = 10 * 1024 * 1024
+  while File.size?(consistent) <= size do
+    `fd . --type f #{gitdir} --exec cat {} >> #{consistent}`
+  end
+end
+
 
 # so that "thebustle" corresponds to "thebustle/thebustle.txt" and "expected/thebustle.out"
 for basename in all.split(" ")

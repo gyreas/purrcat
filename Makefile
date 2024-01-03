@@ -14,6 +14,7 @@ TESTPKG    := aadesaed.cat.tests
 TESTRUNNER := org.testng.TestNG
 TESTPATH   := $(PURR)/tests
 LOG        := test.log
+CONST      := $(TESTPATH)/consistent/consistent.txt
 
 # needed for compilation
 DEPS        := $(addprefix $(PURR)/,app/App.java cmdline/Args.java input/ReadFile.java)
@@ -37,6 +38,7 @@ test: $(PURR)/app/App.class
 	@javac -Werror -cp $(SRC):$(CLASSPATH) $(TESTALL)
 	@java -cp $(SRC):$(CLASSPATH) org.testng.TestNG -log 1 TestAll.xml 2> $(LOG)
 	@printf "\n-----------------------------------------------\n"
+	mv "$(CONST).tmp" "$(CONST)"
 	@echo "OK!"
 
 clean:
@@ -46,3 +48,5 @@ clean:
 	rm -rf test-output/
 	@# Clean up the environment
 	rm -rf $(TESTPATH)/expected/*
+	@echo "mv '$(CONST).tmp' '$(CONST)'"
+	@if [ -f "$(CONST).tmp" ]; then mv "$(CONST).tmp" "$(CONST)"; fi
