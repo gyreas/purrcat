@@ -30,7 +30,7 @@ public class Args {
 
   /** Return an Args with default values */
   public static Args default_args() {
-    var config = new Args();
+    Args config = new Args();
     config.display_help = false;
     config.display_line_numbers = false;
     config.squeeze_blank_lines = false;

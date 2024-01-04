@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.WritableByteChannel;
+import java.util.ArrayList;
 import org.testng.annotations.Test;
 
 public class App {
@@ -85,8 +86,8 @@ public class App {
       OutputOptions options =
           new OutputOptions(mode, config.squeeze_blank_lines, config.display_tabs);
 
-      var files = config.files;
-      for (var file : files) {
+      ArrayList<String> files = config.files;
+      for (String file : files) {
         OutputState state = new OutputState();
         // TODO: fix resource usage in this class
         FileChannel reader = new FileInputStream(file).getChannel();
@@ -208,7 +209,7 @@ public class App {
 
   @Test(enabled = true)
   public void can_Find_Tab_In_Buffer() {
-    System.out.println("[Can find tab in buffer]");
+    // System.out.println("[Can find tab in buffer]");
     ByteBuffer buf = ByteBuffer.wrap("A\ttab".getBytes());
     assertNotSame(find_Tab_In_Buffer(buf), -1, "There's a tab in there.");
   }
