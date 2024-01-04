@@ -1,3 +1,3 @@
-SRC="$HOME/learnings/java/purrcat/src/"
+CP="./target/classes"
 
-java -ea -cp $SRC aadesaed.cat.app.App "$@"
+java -ea -cp $CP aadesaed.cat.app.App "$@"

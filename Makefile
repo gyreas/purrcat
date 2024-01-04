@@ -22,10 +22,10 @@ DEPS        := $(addprefix $(PURR)/,app/App.java cmdline/Args.java input/ReadFil
 CLASSPATH   := $(subst $(space),:,$(addprefix lib/,$(JARS)))
 
 $(PURR)/app/App.class: $(DEPS)
-	@printf "Building the App.\n"
-	javac -cp $(SRC):$(CLASSPATH) $(PURR)/app/App.java
-	@printf "Done.\n"
-	@printf "\n-----------------------------------------------------------------------------\n"
+	@printf "%s Building the App.\n" $(INFO)
+	@mvn compile
+	@printf "%s Done.\n" $(INFO)
+	@echo $(NEWLINE)
 
 run: $(PURR)/app/App.class
 	java -cp src/ aadesaed.cat.app.App
