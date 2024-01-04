@@ -1,3 +1,9 @@
 /lib
 src/aadesaed/cat/**/*.class
 src/aadesaed/cat/tests
+project-layout.scm
+purrcat.iml
+.idea
+Grep.java
+test-output
+docs
