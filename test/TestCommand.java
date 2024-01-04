@@ -1,9 +1,8 @@
-package aadesaed.cat.tests;
+package aadesaed.cat;
 
-/* Defines a command to be run */
-import static aadesaed.cat.tests.TESTHelpers.*;
-import static org.testng.Assert.*;
+import org.testng.Assert;
 
+import static aadesaed.cat.TESTHelpers.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,8 +36,8 @@ public class TestCommand {
     ArrayList<String> cmdline = new ArrayList<>(Arrays.asList(this.args));
     cmdline.add(0, PRG);
 
-    System.out.printf("ARGS: '%s' \n", Arrays.toString(args));
-    System.out.println();
+    // System.out.printf("ARGS: '%s' \n", Arrays.toString(args));
+    // System.out.println();
 
     ProcessBuilder pb = new ProcessBuilder(cmdline);
     pb.directory(new File(TESTDIR));
@@ -59,6 +58,6 @@ public class TestCommand {
   public void assert_output(String expected) {
     String msg =
         String.format("Expected: \n<%s>\n", expected) + String.format("Got: \n<%s>\n", this.out);
-    assertEquals(this.out, expected, msg);
+    Assert.assertEquals(this.out, expected, msg);
   }
 }

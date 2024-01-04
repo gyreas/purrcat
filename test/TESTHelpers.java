@@ -1,13 +1,14 @@
-package aadesaed.cat.tests;
+package aadesaed.cat;
 
 import aadesaed.cat.input.*;
+import aadesaed.cat.TestCommand;
 import java.io.*;
 
 public class TESTHelpers {
   public static final String BASEDIR = "/home/saed/learnings/java/purrcat";
   public static final String PRG = String.format("%s/app.sh", BASEDIR);
   public static final String CAT = String.format("%s/src/aadesaed/cat", BASEDIR);
-  public static final String TESTDIR = String.format("%s/tests", CAT);
+  public static final String TESTDIR = String.format("%s/test", BASEDIR);
 
   public final String EMPTY = "empty.txt";
   public final String FOX = "fox.txt";

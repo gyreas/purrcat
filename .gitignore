@@ -1,11 +1,10 @@
-.idea
+/.idea
 /*.java
 /docs
-/lib
 /out
-/test-output
 *.class
-src/aadesaed/cat/tests/expected
-project-layout.scm
 purrcat.iml
 Grep.java
+test/expected
+target
+src

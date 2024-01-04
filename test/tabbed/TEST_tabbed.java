@@ -1,38 +1,39 @@
-package aadesaed.cat.tests.dummy;
+package aadesaed.cat;
 
-import static aadesaed.cat.tests.TESTHelpers.*;
+import static aadesaed.cat.TESTHelpers.*;
 import static org.testng.Assert.*;
 
 import java.io.IOException;
 import org.testng.annotations.*;
 
-public class TEST_dummy {
-  private final String DUMMY = "dummy/dummy.txt";
+public class TEST_tabbed {
+  private final String TABBED = "tabbed/tabbed.txt";
   private String testdir = TESTDIR;
 
   @Test(groups = "File", enabled = true)
-  public void givenAFile_whenNoOptions_thenNoExternalCharactersInOutput() throws IOException {
-    run(PRG, DUMMY, "expected/dummy.out");
+  public void givenAFileWithTabs_whenNoOptions_thenNoExternalCharactersInOutput()
+      throws IOException {
+    run(PRG, TABBED, "expected/tabbed.out");
   }
 
   @Test(groups = "File", enabled = true)
-  public void givenAFile_whenNumberOnlyNonblankLines_thenNumberOnlyNonblankLines() {
-    run(PRG, new String[] {"-b", DUMMY}, "expected/dummy_b.out");
+  public void givenAFileWithTabs_whenNumberOnlyNonblankLines_thenNumberOnlyNonblankLines() {
+    run(PRG, new String[] {"-b", TABBED}, "expected/tabbed_b.out");
   }
 
   @Test(groups = "File", enabled = true)
-  public void givenAFile_whenShowLineNumber_thenPrependLinesWithLineNumbers() {
-    run(PRG, new String[] {"-n", DUMMY}, "expected/dummy_n.out");
+  public void givenAFileWithTabs_whenShowLineNumber_thenPrependLinesWithLineNumbers() {
+    run(PRG, new String[] {"-n", TABBED}, "expected/tabbed_n.out");
   }
 
   @Test(groups = "File", enabled = true)
-  public void givenAFile_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine() {
-    run(PRG, new String[] {"-s", DUMMY}, "expected/dummy_s.out");
+  public void givenAFileWithTabs_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine() {
+    run(PRG, new String[] {"-s", TABBED}, "expected/tabbed_s.out");
   }
 
   @Test(groups = "File", enabled = true)
-  public void givenAFile_whenShowTabs_thenAllNonprintingTabsBecomeCaretI() {
-    run(PRG, new String[] {"-T", DUMMY}, "expected/dummy_T.out");
+  public void givenAFileWithTabs_whenShowTabs_thenAllNonprintingTabsBecomeCaretI() {
+    run(PRG, new String[] {"-T", TABBED}, "expected/tabbed_T.out");
   }
 }
 // #[test]

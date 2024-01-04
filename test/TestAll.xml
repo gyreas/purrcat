@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+  
+<suite name="Suite" verbose="1" >
+  <test name="Testing">
+    <classes>
+      <class name="aadesaed.cat.TEST_three"/>
+      <class name="aadesaed.cat.TEST_thebustle"/>
+      <class name="aadesaed.cat.TEST_empty"/>
+      <class name="aadesaed.cat.TEST_dummy"/>
+      <class name="aadesaed.cat.TEST_spiders"/>
+      <class name="aadesaed.cat.TEST_fox"/>
+      <class name="aadesaed.cat.TEST_consistent"/>
+      <class name="aadesaed.cat.TEST_tabbed"/>
+      <class name="aadesaed.cat.app.App">
+        <methods> <include name="can_Find_Tab_In_Buffer"/> </methods>
+      </class>
+    </classes>
+  </test>
+</suite>

@@ -1,6 +1,6 @@
-package aadesaed.cat.tests.consistent;
+package aadesaed.cat;
 
-import static aadesaed.cat.tests.TESTHelpers.*;
+import static aadesaed.cat.TESTHelpers.*;
 import static org.testng.Assert.*;
 
 import org.testng.annotations.*;
