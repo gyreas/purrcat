@@ -16,8 +16,8 @@ It's a toy program to improve my familiarity with the Java ecosystem.
 - [x] add the main branch after test suites is up
 - [x] implement file i/o etc
 - [x] implement feature's of Unix cat, so that this cat can purr.
-- [ ] use functional programming techniques, ie, implement each feature as a 
-     function that can simultaneously be applied to a file line-wise
+- [ ] ~~use functional programming techniques, ie, implement each feature as a 
+     function that can simultaneously be applied to a file line-wise~~
 - [ ] Majestic error/exception handling
 - [ ] reading from stdin and pipes (difference?)
 - [ ] ~~versioning via Java git api~~
