@@ -207,13 +207,6 @@ public class App {
     return -1;
   }
 
-  @Test(enabled = true)
-  public void can_Find_Tab_In_Buffer() {
-    // System.out.println("[Can find tab in buffer]");
-    ByteBuffer buf = ByteBuffer.wrap("A\ttab".getBytes());
-    assertNotSame(find_Tab_In_Buffer(buf), -1, "There's a tab in there.");
-  }
-
   private static int write_Tab_To_End(WritableByteChannel writer, ByteBuffer in_Buf)
       throws IOException {
     int count = 0;
@@ -298,5 +291,12 @@ public class App {
 
   private static void print_version() {
     System.out.printf("%s", String.format("%s %s\n", PROGRAM, VERSION));
+  }
+
+  @Test(enabled = true)
+  public void can_Find_Tab_In_Buffer() {
+    System.out.println("[TEST] [ Can find tab in buffer ]");
+    ByteBuffer buf = ByteBuffer.wrap("A\ttab".getBytes());
+    assertNotSame(find_Tab_In_Buffer(buf), -1, "There's a tab in there.");
   }
 }
