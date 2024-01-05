@@ -20,7 +20,7 @@ It's a toy program to improve my familiarity with the Java ecosystem.
      function that can simultaneously be applied to a file line-wise
 - [ ] Majestic error/exception handling
 - [ ] reading from stdin and pipes (difference?)
-- [ ] versioning via Java git api
+- [ ] ~~versioning via Java git api~~
 - [ ] bundle as jar, to infinity
 - [x] upgrade to maven
 - [ ] upgrade to gradle
