@@ -7,33 +7,32 @@ import java.io.IOException;
 import org.testng.annotations.*;
 
 public class TEST_spiders {
-  private final String SPIDERS = "spiders/spiders.txt";
-  private String testdir = TESTDIR;
+  private final String SPIDERS = "test/spiders/spiders.txt";
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenNoOptions_thenNoExternalCharactersInOutput() throws IOException {
-    run(PRG, SPIDERS, "expected/spiders.out");
+    run(PRG, SPIDERS, "test/expected/spiders.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void
       givenAFileWithDifferentEOLs_whenNumberOnlyNonblankLines_thenPrependNonblankLinesWithLineNumbers() {
-    run(PRG, new String[] {"-b", SPIDERS}, "expected/spiders_b.out");
+    run(PRG, new String[] {"-b", SPIDERS}, "test/expected/spiders_b.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenShowLineNumber_thenPrependLinesWithLineNumbers() {
-    run(PRG, new String[] {"-n", SPIDERS}, "expected/spiders_n.out");
+    run(PRG, new String[] {"-n", SPIDERS}, "test/expected/spiders_n.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine() {
-    run(PRG, new String[] {"-s", SPIDERS}, "expected/spiders_s.out");
+    run(PRG, new String[] {"-s", SPIDERS}, "test/expected/spiders_s.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenShowTabs_thenAllNonprintingTabsBecomeCaretI() {
-    run(PRG, new String[] {"-T", SPIDERS}, "expected/spiders_T.out");
+    run(PRG, new String[] {"-T", SPIDERS}, "test/expected/spiders_T.out");
   }
 }
 // #[test]

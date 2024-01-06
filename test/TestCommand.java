@@ -28,8 +28,7 @@ public class TestCommand {
     String a = "";
     for (String arg : this.args) a += String.format("%s ", arg);
 
-    // NOTE: Never forget to trim paths again!!!!!
-    return a.trim();
+    return a;
   }
 
   public void exec() {
@@ -39,7 +38,6 @@ public class TestCommand {
     System.out.printf("[TEST] '%s'\n", Arrays.toString(args));
 
     ProcessBuilder pb = new ProcessBuilder(cmdline);
-    pb.directory(new File(TESTDIR));
     pb.redirectErrorStream(true);
     try {
       Process process = pb.start();

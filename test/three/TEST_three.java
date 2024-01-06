@@ -7,34 +7,33 @@ import java.io.IOException;
 import org.testng.annotations.*;
 
 public class TEST_three {
-  private final String THREE = "three/three.txt";
-  private String testdir = TESTDIR;
+  private final String THREE = "test/three/three.txt";
 
   @Test(groups = "File", enabled = true)
   public void givenAFileWithDifferentEOLs_whenNoOptions_thenPreserveEOLs() throws IOException {
-    run(PRG, THREE, "expected/three.out");
+    run(PRG, THREE, "test/expected/three.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void
       givenAFileWithDifferentEOLs_whenNumberOnlyNonblankLines_thenPrependNonblankLinesWithLineNumbers() {
-    run(PRG, new String[] {"-b", THREE}, "expected/three_b.out");
+    run(PRG, new String[] {"-b", THREE}, "test/expected/three_b.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void
       givenAFileWithDifferentEOLs_whenShowLineNumber_thenPrependLinesWithLineNumbersPreserveEOLs() {
-    run(PRG, new String[] {"-n", THREE}, "expected/three_n.out");
+    run(PRG, new String[] {"-n", THREE}, "test/expected/three_n.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine() {
-    run(PRG, new String[] {"-s", THREE}, "expected/three_s.out");
+    run(PRG, new String[] {"-s", THREE}, "test/expected/three_s.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenShowTabs_thenAllNonprintingTabsBecomeCaretI() {
-    run(PRG, new String[] {"-T", THREE}, "expected/three_T.out");
+    run(PRG, new String[] {"-T", THREE}, "test/expected/three_T.out");
   }
 }
 // #[test]

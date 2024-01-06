@@ -1,14 +1,9 @@
 package aadesaed.cat;
 
-import aadesaed.cat.input.*;
-import aadesaed.cat.TestCommand;
 import java.io.*;
 
 public class TESTHelpers {
-  public static final String BASEDIR = "/home/saed/learnings/java/purrcat";
-  public static final String PRG = String.format("%s/app.sh", BASEDIR);
-  public static final String CAT = String.format("%s/src/aadesaed/cat", BASEDIR);
-  public static final String TESTDIR = String.format("%s/test", BASEDIR);
+  public static final String PRG = "./app.sh";
 
   public final String EMPTY = "empty.txt";
   public final String FOX = "fox.txt";
@@ -17,12 +12,12 @@ public class TESTHelpers {
 
   public static String readAsIs(String filename) throws IOException {
     try {
-      String fname_canon = String.format("%s/%s", TESTDIR, filename).trim();
+      String fname_canon = filename.trim();
       byte[] content = new FileInputStream(fname_canon).readAllBytes();
 
       return new String(content);
     } catch (IOException e) {
-      System.out.printf("Failed to read: '%s' %s\n", TESTDIR, e.getMessage());
+      System.out.printf("Failed to read: '%s' %s\n", filename, e.getMessage());
       System.exit(1);
     }
     return null;

@@ -7,32 +7,31 @@ import java.io.IOException;
 import org.testng.annotations.*;
 
 public class TEST_empty {
-  private final String EMPTY = "empty/empty.txt";
-  private String testdir = TESTDIR;
+  private final String EMPTY = "test/empty/empty.txt";
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenNoOptions_thenNoExternalCharactersInOutput() throws IOException {
-    run(PRG, EMPTY, "expected/empty.out");
+    run(PRG, EMPTY, "test/expected/empty.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenEmptyFile_whenNumberOnlyNonblankLines_thenFileRemainsEmpty() {
-    run(PRG, new String[] {"-b", EMPTY}, "expected/empty_b.out");
+    run(PRG, new String[] {"-b", EMPTY}, "test/expected/empty_b.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenShowLineNumber_thenPrependLinesWithLineNumbers() {
-    run(PRG, new String[] {"-n", EMPTY}, "expected/empty_n.out");
+    run(PRG, new String[] {"-n", EMPTY}, "test/expected/empty_n.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine() {
-    run(PRG, new String[] {"-s", EMPTY}, "expected/empty_s.out");
+    run(PRG, new String[] {"-s", EMPTY}, "test/expected/empty_s.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenShowTabs_thenAllNonprintingTabsBecomeCaretI() {
-    run(PRG, new String[] {"-T", EMPTY}, "expected/empty_T.out");
+    run(PRG, new String[] {"-T", EMPTY}, "test/expected/empty_T.out");
   }
 }
 // #[test]

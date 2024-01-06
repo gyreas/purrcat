@@ -7,33 +7,32 @@ import java.io.IOException;
 import org.testng.annotations.*;
 
 public class TEST_tabbed {
-  private final String TABBED = "tabbed/tabbed.txt";
-  private String testdir = TESTDIR;
+  private final String TABBED = "test/tabbed/tabbed.txt";
 
   @Test(groups = "File", enabled = true)
   public void givenAFileWithTabs_whenNoOptions_thenNoExternalCharactersInOutput()
       throws IOException {
-    run(PRG, TABBED, "expected/tabbed.out");
+    run(PRG, TABBED, "test/expected/tabbed.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFileWithTabs_whenNumberOnlyNonblankLines_thenNumberOnlyNonblankLines() {
-    run(PRG, new String[] {"-b", TABBED}, "expected/tabbed_b.out");
+    run(PRG, new String[] {"-b", TABBED}, "test/expected/tabbed_b.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFileWithTabs_whenShowLineNumber_thenPrependLinesWithLineNumbers() {
-    run(PRG, new String[] {"-n", TABBED}, "expected/tabbed_n.out");
+    run(PRG, new String[] {"-n", TABBED}, "test/expected/tabbed_n.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFileWithTabs_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine() {
-    run(PRG, new String[] {"-s", TABBED}, "expected/tabbed_s.out");
+    run(PRG, new String[] {"-s", TABBED}, "test/expected/tabbed_s.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFileWithTabs_whenShowTabs_thenAllNonprintingTabsBecomeCaretI() {
-    run(PRG, new String[] {"-T", TABBED}, "expected/tabbed_T.out");
+    run(PRG, new String[] {"-T", TABBED}, "test/expected/tabbed_T.out");
   }
 }
 // #[test]

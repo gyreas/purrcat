@@ -7,33 +7,32 @@ import java.io.IOException;
 import org.testng.annotations.*;
 
 public class TEST_thebustle {
-  private final String BUSTLE = "thebustle/thebustle.txt";
-  private String testdir = TESTDIR;
+  private final String BUSTLE = "test/thebustle/thebustle.txt";
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenNoOptions_thenNoExternalCharactersInOutput() throws IOException {
-    run(PRG, BUSTLE, "expected/thebustle.out");
+    run(PRG, BUSTLE, "test/expected/thebustle.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void
       givenAFileWithDifferentEOLs_whenNumberOnlyNonblankLines_thenPrependNonblankLinesWithLineNumbers() {
-    run(PRG, new String[] {"-b", BUSTLE}, "expected/thebustle_b.out");
+    run(PRG, new String[] {"-b", BUSTLE}, "test/expected/thebustle_b.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenShowLineNumber_thenPrependLinesWithLineNumbers() {
-    run(PRG, new String[] {"-n", BUSTLE}, "expected/thebustle_n.out");
+    run(PRG, new String[] {"-n", BUSTLE}, "test/expected/thebustle_n.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine() {
-    run(PRG, new String[] {"-s", BUSTLE}, "expected/thebustle_s.out");
+    run(PRG, new String[] {"-s", BUSTLE}, "test/expected/thebustle_s.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenShowTabs_thenAllNonprintingTabsBecomeCaretI() {
-    run(PRG, new String[] {"-T", BUSTLE}, "expected/thebustle_T.out");
+    run(PRG, new String[] {"-T", BUSTLE}, "test/expected/thebustle_T.out");
   }
 }
 // #[test]

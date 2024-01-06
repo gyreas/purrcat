@@ -16,23 +16,28 @@ build:
 	@printf "%s Done.\n" $(INFO)
 	@echo $(NEWLINE)
 
-tests:
+setup:
 	@echo $(NEWLINE)
 	@printf "%s Setting up the test environment..\n" $(INFO)
 
 	@TESTPATH=$(TESTPATH) $(TESTPATH)/mk-outs.rb
 
 	@printf "%s Done.\n" $(INFO)
+
+tests: setup
 	@printf "%s Running tests...\n" $(INFO)
 
 	@echo $(NEWLINE)
-	@mvn test
+	@TEST=1 mvn test
 
 	@mv "$(CONST).tmp" "$(CONST)"
 
 	@echo "$(INFO)"
 	@echo "$(INFO) OK!"
 	@echo $(NEWLINE)
+
+package: setup
+	@TEST=1 mvn package
 
 clean:
 	@printf "%s Cleaning up test enviroment..\n" $(INFO)

@@ -7,33 +7,32 @@ import java.io.IOException;
 import org.testng.annotations.*;
 
 public class TEST_fox {
-  private final String FOX = "fox/fox.txt";
-  private String testdir = TESTDIR;
+  private final String FOX = "test/fox/fox.txt";
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenNoOptions_thenNoExternalCharactersInOutput() throws IOException {
-    run(PRG, FOX, "expected/fox.out");
+    run(PRG, FOX, "test/expected/fox.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void
       givenRegularFile_whenNumberOnlyNonblankLines_thenPrependNonblankLinesWithLineNumber() {
-    run(PRG, new String[] {"-b", FOX}, "expected/fox_b.out");
+    run(PRG, new String[] {"-b", FOX}, "test/expected/fox_b.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenShowLineNumber_thenPrependLinesWithLineNumbers() {
-    run(PRG, new String[] {"-n", FOX}, "expected/fox_n.out");
+    run(PRG, new String[] {"-n", FOX}, "test/expected/fox_n.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine() {
-    run(PRG, new String[] {"-s", FOX}, "expected/fox_s.out");
+    run(PRG, new String[] {"-s", FOX}, "test/expected/fox_s.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenShowTabs_thenAllNonprintingTabsBecomeCaretI() {
-    run(PRG, new String[] {"-T", FOX}, "expected/fox_T.out");
+    run(PRG, new String[] {"-T", FOX}, "test/expected/fox_T.out");
   }
 }
 // #[test]

@@ -6,32 +6,31 @@ import static org.testng.Assert.*;
 import org.testng.annotations.*;
 
 public class TEST_consistent {
-  private final String CONSISTENT = "consistent/consistent.txt";
-  private String testdir = TESTDIR;
+  private final String CONSISTENT = "test/consistent/consistent.txt";
 
   @Test(groups = "File", enabled = false)
   public void givenAFile_whenNoOptions_thenNoExternalCharactersInOutput() {
-    run(PRG, CONSISTENT, "expected/consistent.out");
+    run(PRG, CONSISTENT, "test/expected/consistent.out");
   }
 
   @Test(groups = "File", enabled = false)
   public void givenAFile_whenNumberOnlyNonblankLines_thenNumberOnlyNonblankLines() {
-    run(PRG, new String[] {"-b", CONSISTENT}, "expected/consistent_b.out");
+    run(PRG, new String[] {"-b", CONSISTENT}, "test/expected/consistent_b.out");
   }
 
   @Test(groups = "File", enabled = false)
   public void givenAFile_whenShowLineNumber_thenPrependLinesWithLineNumbers() {
-    run(PRG, new String[] {"-n", CONSISTENT}, "expected/consistent_n.out");
+    run(PRG, new String[] {"-n", CONSISTENT}, "test/expected/consistent_n.out");
   }
 
   @Test(groups = "File", enabled = false)
   public void givenAFile_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine() {
-    run(PRG, new String[] {"-s", CONSISTENT}, "expected/consistent_s.out");
+    run(PRG, new String[] {"-s", CONSISTENT}, "test/expected/consistent_s.out");
   }
 
   @Test(groups = "File", enabled = false)
   public void givenAFile_whenShowTabs_thenAllNonprintingTabsBecomeCaretI() {
-    run(PRG, new String[] {"-T", CONSISTENT}, "expected/consistent_T.out");
+    run(PRG, new String[] {"-T", CONSISTENT}, "test/expected/consistent_T.out");
   }
 }
 // #[test]

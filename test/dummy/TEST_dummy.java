@@ -7,32 +7,31 @@ import java.io.IOException;
 import org.testng.annotations.*;
 
 public class TEST_dummy {
-  private final String DUMMY = "dummy/dummy.txt";
-  private String testdir = TESTDIR;
+  private final String DUMMY = "test/dummy/dummy.txt";
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenNoOptions_thenNoExternalCharactersInOutput() throws IOException {
-    run(PRG, DUMMY, "expected/dummy.out");
+    run(PRG, DUMMY, "test/expected/dummy.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenNumberOnlyNonblankLines_thenNumberOnlyNonblankLines() {
-    run(PRG, new String[] {"-b", DUMMY}, "expected/dummy_b.out");
+    run(PRG, new String[] {"-b", DUMMY}, "test/expected/dummy_b.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenShowLineNumber_thenPrependLinesWithLineNumbers() {
-    run(PRG, new String[] {"-n", DUMMY}, "expected/dummy_n.out");
+    run(PRG, new String[] {"-n", DUMMY}, "test/expected/dummy_n.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine() {
-    run(PRG, new String[] {"-s", DUMMY}, "expected/dummy_s.out");
+    run(PRG, new String[] {"-s", DUMMY}, "test/expected/dummy_s.out");
   }
 
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenShowTabs_thenAllNonprintingTabsBecomeCaretI() {
-    run(PRG, new String[] {"-T", DUMMY}, "expected/dummy_T.out");
+    run(PRG, new String[] {"-T", DUMMY}, "test/expected/dummy_T.out");
   }
 }
 // #[test]

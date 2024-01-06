@@ -15,12 +15,8 @@ import java.util.ArrayList;
 import org.testng.annotations.Test;
 
 public class App {
-
-  private static final String PROGRAM = "cat";
-  private static final String LICENSE = "MPL-2.0"; // TODO: read from a file
-  private static final String VERSION = "v0.0.2"; // TODO: read from a file
-  private static final String AUTHOR = "Saheed Adeleye";
-  private static final String AUTHOR_EMAIL = "aadesaed@tuta.io";
+  public static final String RESDIR = "src/aadesaed/cat/app/resources/";
+  private static final Props PROPS = new Props(RESDIR + "/META-INF/application.properties");
   private static final String NEWLINE = System.lineSeparator();
 
   private enum Numbering_Mode {
@@ -274,23 +270,28 @@ public class App {
         String.join(
             NEWLINE,
             app_meta(),
+            "USAGE:",
+            "    purrcat [options] [files]",
+            "-----",
             "-h, --help               display this help and exit",
             "-n, --number             number all output lines",
             "-b, --number-nonblank    number all nonempty output lines, overrides -n",
             "-s, --squeeze-blank      suppress repeated empty output line",
             "-T, --show-tabs          display TAB characters as ^I",
-            "-V, --version            output version information and exit");
+            "-V, --version            output version information and exit",
+            "");
 
     System.out.printf("%s\n", usage);
   }
 
   private static String app_meta() {
-    return String.format("Author: %s <%s>\n", AUTHOR, AUTHOR_EMAIL)
-        + String.format("License: %s\n", LICENSE);
+    return String.format("author: %s\n", PROPS.get_Author())
+        + String.format("license: %s\n", PROPS.get_License());
   }
 
   private static void print_version() {
-    System.out.printf("%s", String.format("%s %s\n", PROGRAM, VERSION));
+    String version = PROPS.get_Version();
+    System.out.printf("%s", String.format("%s %s\n", PROPS.get_App_Name(), version));
   }
 
   @Test(enabled = true)

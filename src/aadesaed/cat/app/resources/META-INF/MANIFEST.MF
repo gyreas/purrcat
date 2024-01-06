@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Created-By: Apache Maven 3.9.3
+Built-By: Saheed Adeleye <aadesaed@tuta.io>
+Build-Jdk: 17.0.10
+Main-Class: aadesaed.cat.app.App

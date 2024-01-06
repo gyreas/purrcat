@@ -5,7 +5,8 @@
 
   <groupId>aadesaed.cat.app</groupId>
   <artifactId>purrcat</artifactId>
-  <version>0.0.3-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
+  <packaging>jar</packaging>
   <name>purrcat</name>
   <description>
   My purrcat: A Java implementation of Unix cat
@@ -46,8 +47,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
-    <maven.testng.suitexml.name>TestAll.xml</maven.testng.suitexml.name>
-    <maven.testng.suitexml.dir>test</maven.testng.suitexml.dir>
+    <app.dir>src/aadesaed/cat/app</app.dir>
+    <app.resources>${app.dir}/resources</app.resources>
+    <app.license>MPL-2.0</app.license>
   </properties>
 
   <dependencies>
@@ -65,6 +67,12 @@
     <testSourceDirectory>test</testSourceDirectory>
     <testOutputDirectory>target/test-classes</testOutputDirectory>
 
+    <resources>
+      <resource>
+        <directory>${app.resources}</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -74,6 +82,24 @@
           <suiteXmlFiles>
             <suiteXmlFile>test/TestAll.xml</suiteXmlFile>
           </suiteXmlFiles>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <archive>
+            <manifestFile>${app.resources}/META-INF/MANIFEST.MF</manifestFile>
+            <manifestEntries>
+              <License>${app.license}</License>
+            </manifestEntries>
+            <manifest>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+              <mainClass>aadesaed.cat.app.App</mainClass>
+              <packageName>purrcat</packageName>
+            </manifest>
+          </archive>
         </configuration>
       </plugin>
     </plugins>
