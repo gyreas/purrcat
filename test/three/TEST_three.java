@@ -32,6 +32,11 @@ public class TEST_three {
   }
 
   @Test(groups = "File", enabled = true)
+  public void givenAFile_whenShowNonprintingChars_thenAllNonprintingCharsShown() {
+    run(PRG, new String[] {"-v", THREE}, "test/expected/three_v.out");
+  }
+
+  @Test(groups = "File", enabled = true)
   public void givenAFile_whenShowTabs_thenAllNonprintingTabsBecomeCaretI() {
     run(PRG, new String[] {"-T", THREE}, "test/expected/three_T.out");
   }

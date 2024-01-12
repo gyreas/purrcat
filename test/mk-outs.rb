@@ -48,6 +48,9 @@ for basename in all.split(" ")
   # `cat -n < #{file} > #{outdir}/#{basename}_stdin_n.out`
 end
 
+# exceptionals
+`cat -v three/three.txt > expected/three_v.out`
+
 # transport style
 # `cat -b -E    #{bustle} > #{outdir}/the-bustle_bE.out`
 # `cat -n -E    #{bustle} > #{outdir}/the-bustle_nE.out`

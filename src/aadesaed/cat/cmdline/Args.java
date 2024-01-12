@@ -14,6 +14,7 @@ public class Args {
    * -b | --number-nonblank
    * -s | --squeeze-blank-lines
    * -T | --show-tabs
+   * -v | --show-nonprinting
    * <files>
    */
   public ArrayList<String> files;
@@ -22,6 +23,7 @@ public class Args {
   public boolean display_line_numbers;
   public boolean display_line_numbers_nonblank;
   public boolean display_tabs;
+  public boolean display_nonprinting;
   public boolean squeeze_blank_lines;
 
   public Args() {
@@ -37,6 +39,7 @@ public class Args {
     config.display_version = true; // indicates that the app works, just no input file
     config.display_line_numbers_nonblank = true;
     config.display_tabs = false;
+    config.display_nonprinting = false;
     config.files = new ArrayList<>();
     return config;
   }
@@ -72,6 +75,9 @@ public class Args {
         args.remove(i);
       } else if (arg.equals("-T") || arg.equals("--show-tabs")) {
         config.display_tabs = true;
+        args.remove(i);
+      } else if (arg.equals("-v") || arg.equals("--show-nonprinting")) {
+        config.display_nonprinting = true;
         args.remove(i);
       } else if (arg.equals("--")) {
         config.files = new ArrayList<>(args.subList(i + 1, args.size()));
