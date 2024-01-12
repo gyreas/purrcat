@@ -294,7 +294,7 @@ public class App {
     System.out.printf("%s", String.format("%s %s\n", PROPS.get_App_Name(), version));
   }
 
-  @Test(enabled = true)
+  @Test
   public void can_Find_Tab_In_Buffer() {
     System.out.println("[TEST] [ Can find tab in buffer ]");
     ByteBuffer buf = ByteBuffer.wrap("A\ttab".getBytes());
