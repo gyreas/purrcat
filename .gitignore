@@ -4,7 +4,6 @@
 /out
 *.class
 purrcat.iml
-Grep.java
 test/expected
 target
 benchmarking
