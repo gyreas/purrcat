@@ -39,10 +39,15 @@ public class App {
     boolean show_Ends;
     boolean show_Nonprint;
 
-    OutputOptions(Numbering_Mode number, boolean squeeze_Blank_Lines, boolean show_Tabs) {
+    OutputOptions(
+        Numbering_Mode number,
+        boolean squeeze_Blank_Lines,
+        boolean show_Tabs,
+        boolean show_Nonprint) {
       this.number = number;
       this.squeeze_Blank_Lines = squeeze_Blank_Lines;
       this.show_Tabs = show_Tabs;
+      this.show_Nonprint = show_Nonprint;
     }
 
     String tab() {
@@ -80,7 +85,8 @@ public class App {
       else mode = Numbering_Mode.None;
 
       OutputOptions options =
-          new OutputOptions(mode, config.squeeze_blank_lines, config.display_tabs);
+          new OutputOptions(
+              mode, config.squeeze_blank_lines, config.display_tabs, config.display_nonprinting);
 
       ArrayList<String> files = config.files;
       for (String file : files) {
@@ -115,7 +121,7 @@ public class App {
         }
 
         if (b == '\n') {
-          write_New_Line(out, state, options);
+          write_Newline(out, state, options);
           pos++;
           state.at_Line_Start = true;
           continue;
@@ -158,11 +164,9 @@ public class App {
   private static int write_End(WritableByteChannel writer, ByteBuffer buf, OutputOptions options)
       throws IOException {
     int amt;
-    // if (options.show_Nonprint) {
-    //   System.exit(1);
-    //   amt = 0; // write_nonprint_to_end(in_buf, writer, options.tab().as_bytes())
-    // } else
-    if (options.show_Tabs) {
+    if (options.show_Nonprint) {
+      amt = write_Nonprint_To_End(buf, options.tab().getBytes());
+    } else if (options.show_Tabs) {
       amt = write_Tab_To_End(writer, buf);
     } else {
       amt = write_To_End(writer, buf);
@@ -170,7 +174,7 @@ public class App {
     return amt;
   }
 
-  private static void write_New_Line(PrintStream writer, OutputState state, OutputOptions options)
+  private static void write_Newline(PrintStream writer, OutputState state, OutputOptions options)
       throws IOException {
     if (state.skipped_Carriage_Return && options.show_Ends) {
       writer.write("^M".getBytes());
@@ -243,27 +247,29 @@ public class App {
     return len;
   }
 
-  // fn write_nonprint_to_end<W: Write>(in_buf: &[u8], writer: &mut W, tab: &[u8]) -> usize {
-  //     let mut count = 0;
+  private static int write_Nonprint_To_End(ByteBuffer buf, byte[] tab) throws IOException {
+    PrintStream writer = System.out;
+    int count = 0;
+    int len = buf.remaining();
+    for (int i = 0; i < len; ++i) {
+      int b = Byte.toUnsignedInt(buf.get(i));
+      if (b == (byte) '\n') break;
+      if (b == 9) writer.write(tab);
+      else if ((0 <= b && b <= 8) || (10 <= b && b <= 31))
+        writer.write(new byte[] {'^', (byte) (b + 64)});
+      else if (32 <= b && b <= 126) {
+        writer.write(new byte[] {(byte) b});
+      } else if (b == 127) writer.write(new byte[] {'^', '?'});
+      else if (128 <= (int) b && (int) b <= 159) {
+        writer.write(new byte[] {'M', '-', '^', (byte) (b - 64)});
+      } else if (160 <= (int) b && (int) b <= 254) {
+        writer.write(new byte[] {'M', '-', (byte) (b - 128)});
+      } else writer.write(new byte[] {'M', '-', '^', '?'});
 
-  //     for byte in in_buf.iter().copied() {
-  //         if byte == b'\n' {
-  //             break;
-  //         }
-  //         match byte {
-  //             9 => writer.write_all(tab),
-  //             0..=8 | 10..=31 => writer.write_all(&[b'^', byte + 64]),
-  //             32..=126 => writer.write_all(&[byte]),
-  //             127 => writer.write_all(&[b'^', b'?']),
-  //             128..=159 => writer.write_all(&[b'M', b'-', b'^', byte - 64]),
-  //             160..=254 => writer.write_all(&[b'M', b'-', byte - 128]),
-  //             _ => writer.write_all(&[b'M', b'-', b'^', b'?']),
-  //         }
-  //         .unwrap();
-  //         count += 1;
-  //     }
-  //     count
-  // }
+      count++;
+    }
+    return count;
+  }
 
   private static void print_usage() {
     String usage =
@@ -278,6 +284,7 @@ public class App {
             "-b, --number-nonblank    number all nonempty output lines, overrides -n",
             "-s, --squeeze-blank      suppress repeated empty output line",
             "-T, --show-tabs          display TAB characters as ^I",
+            "-v, --show-nonprinting   use ^ and M- notation, except for LFD and TAB",
             "-V, --version            output version information and exit",
             "");
 
@@ -294,7 +301,7 @@ public class App {
     System.out.printf("%s", String.format("%s %s\n", PROPS.get_App_Name(), version));
   }
 
-  @Test(enabled = true)
+  @Test
   public void can_Find_Tab_In_Buffer() {
     System.out.println("[TEST] [ Can find tab in buffer ]");
     ByteBuffer buf = ByteBuffer.wrap("A\ttab".getBytes());
