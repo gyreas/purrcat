@@ -39,6 +39,7 @@ for basename in all.split(" ")
   `cat -b #{basename}/#{file} > #{outdir}/#{basename}_b.out`
   `cat -n #{basename}/#{file} > #{outdir}/#{basename}_n.out`
   `cat -s #{basename}/#{file} > #{outdir}/#{basename}_s.out`
+  `cat -v #{basename}/#{file} > #{outdir}/#{basename}_v.out`
   `cat -E #{basename}/#{file} > #{outdir}/#{basename}_E.out`
   `cat -T #{basename}/#{file} > #{outdir}/#{basename}_T.out`
 
@@ -49,7 +50,6 @@ for basename in all.split(" ")
 end
 
 # exceptionals
-`cat -v three/three.txt > expected/three_v.out`
 `cat -b thebustle/thebustle.txt fox/fox.txt three/three.txt > expected/multiple_b.out`
 `cat -n thebustle/thebustle.txt fox/fox.txt three/three.txt > expected/multiple_n.out`
 
@@ -77,3 +77,4 @@ end
 
 Dir.chdir projectdir
 exit 0
+
