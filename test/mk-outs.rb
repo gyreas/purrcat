@@ -50,6 +50,8 @@ end
 
 # exceptionals
 `cat -v three/three.txt > expected/three_v.out`
+`cat -b thebustle/thebustle.txt fox/fox.txt three/three.txt > expected/multiple_b.out`
+`cat -n thebustle/thebustle.txt fox/fox.txt three/three.txt > expected/multiple_n.out`
 
 # transport style
 # `cat -b -E    #{bustle} > #{outdir}/the-bustle_bE.out`
@@ -75,4 +77,3 @@ end
 
 Dir.chdir projectdir
 exit 0
-

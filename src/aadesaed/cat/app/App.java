@@ -15,8 +15,7 @@ import java.util.ArrayList;
 import org.testng.annotations.Test;
 
 public class App {
-  public static final String RESDIR = "src/aadesaed/cat/app/resources/";
-  private static final Props PROPS = new Props(RESDIR + "/META-INF/application.properties");
+  private static final Props PROPS = new Props("/META-INF/application.properties");
   private static final String NEWLINE = System.lineSeparator();
 
   private enum Numbering_Mode {
@@ -89,8 +88,8 @@ public class App {
               mode, config.squeeze_blank_lines, config.display_tabs, config.display_nonprinting);
 
       ArrayList<String> files = config.files;
+      OutputState state = new OutputState();
       for (String file : files) {
-        OutputState state = new OutputState();
         // TODO: fix resource usage in this class
         FileChannel reader = new FileInputStream(file).getChannel();
         write_Lines(reader, state, options);

@@ -3,13 +3,14 @@ A Java implementation of Unix cat. No meows, please.
 It's a toy program to improve my familiarity with the Java ecosystem.
 
 ### How to build
-> **NOTE**: you'll need to have installed the `make` program
+> **NOTE**: you'll need to have installed `make` and Apache `maven`.
 
 1. Clone the repo: `git clone https://github.com/gyreas/purrcat.git`
 2. Enter the dir: `cd purrcat`
-3. Build with: `make`
+3. Build with: `make build`
 4. Run the tests with: `make tests` (note the 's' in 'tests')
 5. Test with: `./app.sh <options & files here>`
+6. To build a standalone JAR, do: `make clean package`
 
 ### TODO
 - [x] implement tiny testing library / find a tiny library jar
@@ -21,6 +22,7 @@ It's a toy program to improve my familiarity with the Java ecosystem.
 - [ ] Majestic error/exception handling
 - [ ] reading from stdin and pipes (difference?)
 - [ ] ~~versioning via Java git api~~
-- [ ] bundle as jar, to infinity
+- [x] bundle as jar, to infinity
 - [x] upgrade to maven
 - [ ] upgrade to gradle
+- [ ] no more than 4x slower than Unix cat--this purrcat can run too.
