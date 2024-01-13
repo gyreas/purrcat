@@ -15,8 +15,7 @@ import java.util.ArrayList;
 import org.testng.annotations.Test;
 
 public class App {
-  public static final String RESDIR = "src/aadesaed/cat/app/resources/";
-  private static final Props PROPS = new Props(RESDIR + "/META-INF/application.properties");
+  private static final Props PROPS = new Props("/META-INF/application.properties");
   private static final String NEWLINE = System.lineSeparator();
 
   private enum Numbering_Mode {
