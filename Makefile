@@ -37,6 +37,7 @@ tests: setup
 	@echo $(NEWLINE)
 
 package: setup
+	@./format-all.sh
 	@TEST=1 mvn package
 
 clean:
