@@ -90,6 +90,7 @@
           <suiteXmlFiles>
             <suiteXmlFile>test/TestAll.xml</suiteXmlFile>
           </suiteXmlFiles>
+          <groups>File,Stdin</groups>
         </configuration>
       </plugin>
       <plugin>

@@ -44,14 +44,24 @@ for basename in all.split(" ")
   `cat -T #{basename}/#{file} > #{outdir}/#{basename}_T.out`
 
   # passing the content of the file to cat's stdin
-  # `cat    < #{file} > #{outdir}/#{basename}_stdin.out`
-  # `cat -b < #{file} > #{outdir}/#{basename}_stdin_b.out`
-  # `cat -n < #{file} > #{outdir}/#{basename}_stdin_n.out`
+  `cat    < #{basename}/#{file} > #{outdir}/#{basename}_stdin.out`
+  `cat -b < #{basename}/#{file} > #{outdir}/#{basename}_stdin_b.out`
+  `cat -n < #{basename}/#{file} > #{outdir}/#{basename}_stdin_n.out`
+  `cat -s #{basename}/#{file} > #{outdir}/#{basename}_stdin_s.out`
+  `cat -v #{basename}/#{file} > #{outdir}/#{basename}_stdin_v.out`
+  `cat -E #{basename}/#{file} > #{outdir}/#{basename}_stdin_E.out`
+  `cat -T #{basename}/#{file} > #{outdir}/#{basename}_stdin_T.out`
 end
 
 # exceptionals
-`cat -b thebustle/thebustle.txt fox/fox.txt three/three.txt > expected/multiple_b.out`
-`cat -n thebustle/thebustle.txt fox/fox.txt three/three.txt > expected/multiple_n.out`
+multiple = ["dummy/dummy.txt", "empty/empty.txt", "tabbed/tabbed.txt", "three/three.txt"].join(" ")
+
+`cat -b   #{multiple} > expected/multiple_b.out`
+`cat -v   #{multiple} > expected/multiple_v.out`
+
+`cat #{multiple} | cat -b > expected/multiple_stdin_b.out`
+`cat #{multiple} | cat -v > expected/multiple_stdin_v.out`
+`cat #{multiple} | cat -T > expected/multiple_stdin_T.out`
 
 # transport style
 # `cat -b -E    #{bustle} > #{outdir}/the-bustle_bE.out`
@@ -77,4 +87,3 @@ end
 
 Dir.chdir projectdir
 exit 0
-

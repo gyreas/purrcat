@@ -3,12 +3,8 @@ package aadesaed.cat;
 import java.io.*;
 
 public class TESTHelpers {
+  // TODO: Implement this via JVM
   public static final String PRG = "./app.sh";
-
-  public final String EMPTY = "empty.txt";
-  public final String FOX = "fox.txt";
-  public final String SPIDERS = "spiders.txt";
-  public final String THREE = "three.txt";
 
   public static String readAsIs(String filename) throws IOException {
     try {
@@ -23,10 +19,10 @@ public class TESTHelpers {
     return null;
   }
 
-  public static void run(String cmd, String args, String expected) {
+  public static void run(String cmd, String arg, String expected) {
     try {
       String out = readAsIs(expected);
-      TestCommand tc = new TestCommand(cmd, args);
+      TestCommand tc = new TestCommand(cmd, arg);
       tc.exec();
       tc.assert_output(out);
     } catch (IOException x) {
@@ -39,6 +35,78 @@ public class TESTHelpers {
       String out = readAsIs(expected);
       TestCommand tc = new TestCommand(cmd, args);
       tc.exec();
+      tc.assert_output(out);
+    } catch (IOException x) {
+      System.out.printf("Unable to read file: %s\n", x.getMessage());
+    }
+  }
+
+  public static void run(String cmd, String arg, String[] inputs, String expected) {
+    try {
+      String out = readAsIs(expected);
+      TestCommand tc = new TestCommand(cmd, arg);
+      tc.exec(inputs);
+      tc.assert_output(out);
+    } catch (IOException x) {
+      System.out.printf("Unable to read file: %s\n", x.getMessage());
+    }
+  }
+
+  // single input source
+  public static void run_Stdin(String cmd, String input, String expected) {
+    try {
+      String out = readAsIs(expected);
+      TestCommand tc = new TestCommand(cmd, "");
+      tc.exec_In(input);
+      tc.assert_output(out);
+    } catch (IOException x) {
+      System.out.printf("Unable to read file: %s\n", x.getMessage());
+    }
+  }
+
+  // single input source single arg
+  public static void run_Stdin(String cmd, String arg, String input, String expected) {
+    try {
+      String out = readAsIs(expected);
+      TestCommand tc = new TestCommand(cmd, arg);
+      tc.exec_In(input);
+      tc.assert_output(out);
+    } catch (IOException x) {
+      System.out.printf("Unable to read file: %s\n", x.getMessage());
+    }
+  }
+
+  // single input source multiple args
+  public static void run_Stdin(String cmd, String args[], String input, String expected) {
+    try {
+      String out = readAsIs(expected);
+      TestCommand tc = new TestCommand(cmd, args);
+      tc.exec_In(input);
+      tc.assert_output(out);
+    } catch (IOException x) {
+      System.out.printf("Unable to read file: %s\n", x.getMessage());
+    }
+    ;
+  }
+
+  // multiple input sources multiple args
+  public static void run_Stdin(String cmd, String arg, String[] inputs, String expected) {
+    try {
+      String out = readAsIs(expected);
+      TestCommand tc = new TestCommand(cmd, arg);
+      tc.exec_In(inputs);
+      tc.assert_output(out);
+    } catch (IOException x) {
+      System.out.printf("Unable to read file: %s\n", x.getMessage());
+    }
+  }
+
+  // multiple input sources multiple args
+  public static void run_Stdin(String cmd, String[] args, String[] inputs, String expected) {
+    try {
+      String out = readAsIs(expected);
+      TestCommand tc = new TestCommand(cmd, args);
+      tc.exec_In(inputs);
       tc.assert_output(out);
     } catch (IOException x) {
       System.out.printf("Unable to read file: %s\n", x.getMessage());
@@ -59,18 +127,14 @@ public class TESTHelpers {
     // }
   }
 
-  public static void run_stdin(String input_file, String[] args, String expected_file) {
-    // new TestCommand(blah).exec();
-
-    // let input = fs::read_to_string(input_file);
-    // let expected = fs::read_to_string(expected_file);
+  public static void skips_bad_file() {
+    // let bad = gen_bad_file();
+    // let expected = format!("{}: .* [(]os error 2[)]", bad);
     // Command::cargo_bin(PRG)
-    //     .args(args)
-    //     .write_stdin(input)
+    //     .arg(&bad)
     //     .assert()
     //     .success()
-    //     .stdout(expected);
-
+    //     .stderr(predicate::str::is_match(expected));
   }
 
   public static void usage() {
@@ -80,25 +144,5 @@ public class TESTHelpers {
     //         .assert()
     //         .stdout(predicate::str::contains("USAGE"));
     // }
-  }
-
-  public static void linebr() {
-    char ch = '-';
-    int n = 15;
-    System.out.printf("%s\n", Character.toString(ch).repeat(n));
-  }
-
-  public static void linebr(char ch, int n) {
-    System.out.printf("%s\n", Character.toString(ch).repeat(n));
-  }
-
-  public static void skips_bad_file() {
-    // let bad = gen_bad_file();
-    // let expected = format!("{}: .* [(]os error 2[)]", bad);
-    // Command::cargo_bin(PRG)
-    //     .arg(&bad)
-    //     .assert()
-    //     .success()
-    //     .stderr(predicate::str::is_match(expected));
   }
 }
