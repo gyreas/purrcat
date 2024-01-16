@@ -9,6 +9,17 @@ import org.testng.annotations.*;
 public class TEST_dummy {
   private final String DUMMY = "test/dummy/dummy.txt";
 
+  @BeforeClass(groups = {"File", "Stdin"})
+  public void announce() {
+    System.out.println("[TEST]");
+    System.out.println("[TEST] ------< dummy >------");
+  }
+
+  @AfterClass(groups = {"File", "Stdin"})
+  public void line_Break() {
+    System.out.println("[TEST]");
+  }
+
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenNoOptions_thenNoExternalCharactersInOutput() throws IOException {
     run(PRG, DUMMY, "test/expected/dummy.out");
@@ -32,6 +43,31 @@ public class TEST_dummy {
   @Test(groups = "File", enabled = true)
   public void givenAFile_whenShowTabs_thenAllNonprintingTabsBecomeCaretI() {
     run(PRG, new String[] {"-T", DUMMY}, "test/expected/dummy_T.out");
+  }
+
+  @Test(groups = "Stdin", enabled = true)
+  public void givenStdin_whenNoOptions_thenNoExternalCharactersInOutput() throws IOException {
+    run_Stdin(PRG, DUMMY, "test/expected/dummy_stdin.out");
+  }
+
+  @Test(groups = "Stdin", enabled = true)
+  public void givenStdin_whenNumberOnlyNonblankLines_thenPrependNonblankLinesWithLineNumber() {
+    run_Stdin(PRG, "-b", DUMMY, "test/expected/dummy_stdin_b.out");
+  }
+
+  @Test(groups = "Stdin", enabled = true)
+  public void givenStdin_whenShowLineNumber_thenPrependLinesWithLineNumbers() {
+    run_Stdin(PRG, "-n", DUMMY, "test/expected/dummy_stdin_n.out");
+  }
+
+  @Test(groups = "Stdin", enabled = true)
+  public void givenStdin_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine() {
+    run_Stdin(PRG, "-s", DUMMY, "test/expected/dummy_stdin_s.out");
+  }
+
+  @Test(groups = "Stdin", enabled = true)
+  public void givenStdin_whenShowTabs_thenAllNonprintingTabsBecomeCaretI() {
+    run_Stdin(PRG, "-T", DUMMY, "test/expected/dummy_stdin_T.out");
   }
 }
 // #[test]

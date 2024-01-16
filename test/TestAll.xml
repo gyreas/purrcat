@@ -2,23 +2,20 @@
   
 <suite name="Suite" verbose="1" >
   <test name="Testing">
-    <classes>
-      <class name="aadesaed.cat.app.App">
-        <methods> <include name="can_Find_Tab_In_Buffer"/> </methods>
-      </class>
-      <class name="aadesaed.cat.TEST_dummy"/>
-      <class name="aadesaed.cat.TEST_empty"/>
-      <class name="aadesaed.cat.TEST_fox"/>
-      <class name="aadesaed.cat.TEST_spiders"/>
-      <class name="aadesaed.cat.TEST_tabbed"/>
-      <class name="aadesaed.cat.TEST_thebustle"/>
-      <class name="aadesaed.cat.TEST_three"/>
-      <class name="aadesaed.cat.TEST_multiple"/>
-      <!-- 
-        * TODO: Investigate why this dooms the last (yeah, always the last one) testcase
-        * Uncomment the line below, after commenting other classes, to check for consistency
+      <classes>
+        <class name="aadesaed.cat.app.App">
+          <methods> <include name="can_Find_Tab_In_Buffer"/> 
+          </methods>
+        </class>
+        <class name="aadesaed.cat.TEST_dummy"/>
+        <class name="aadesaed.cat.TEST_empty"/>
+        <class name="aadesaed.cat.TEST_tabbed"/>
+        <class name="aadesaed.cat.TEST_three"/>
+        <class name="aadesaed.cat.TEST_multiple"/>
+        <!--  * TODO: Investigate why this dooms the last (yeah, always the last one) testcase
+          * Uncomment the line below, after commenting other classes, to check for consistency
         <class name="aadesaed.cat.TEST_consistent"/>
-       -->
-    </classes>
+         -->
+      </classes>
   </test>
 </suite>

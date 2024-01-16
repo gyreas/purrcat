@@ -38,7 +38,7 @@ tests: setup
 
 package: setup
 	@./format-all.sh
-	@TEST=1 mvn package
+	@TEST=1 mvn -B package --file pom.xml
 
 clean:
 	@printf "%s Cleaning up test enviroment..\n" $(INFO)

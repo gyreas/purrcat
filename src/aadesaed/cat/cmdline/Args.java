@@ -15,7 +15,7 @@ public class Args {
    * -s | --squeeze-blank-lines
    * -T | --show-tabs
    * -v | --show-nonprinting
-   * <files>
+   * <files incl. stdin>
    */
   public ArrayList<String> files;
   public boolean display_help;
@@ -36,8 +36,8 @@ public class Args {
     config.display_help = false;
     config.display_line_numbers = false;
     config.squeeze_blank_lines = false;
-    config.display_version = true; // indicates that the app works, just no input file
-    config.display_line_numbers_nonblank = true;
+    config.display_version = false;
+    config.display_line_numbers_nonblank = false;
     config.display_tabs = false;
     config.display_nonprinting = false;
     config.files = new ArrayList<>();
@@ -82,6 +82,9 @@ public class Args {
       } else if (arg.equals("--")) {
         config.files = new ArrayList<>(args.subList(i + 1, args.size()));
         return config;
+      } else if (arg.equals("-")) {
+        config.files.add(arg);
+        args.remove(i);
       } else if (arg.startsWith("-")) {
         System.out.printf(
             "purrcat: '%s' is an invalid option.\n",
@@ -93,6 +96,8 @@ public class Args {
         args.remove(i);
       }
     }
+
+    if (config.files.isEmpty()) config.files.add("-");
 
     return config;
   }
