@@ -3,7 +3,7 @@ projectdir = Dir.pwd
 gitdir     = "#{projectdir}/.git"
 root       = ENV["TESTPATH"]
 outdir     = "expected"
-all        = "thebustle empty fox spiders three consistent dummy tabbed"
+all        = "consistent dummy empty tabbed three"
 
 # Enter test directory
 if !root.nil?
@@ -26,8 +26,9 @@ if File.size?(consistent) < 1024
   File.copy_stream(consistent, tmp)
   size = 10 * 1024 * 1024
   while File.size?(consistent) <= size do
-    `fd . --type f #{gitdir} --exec cat {} >> #{consistent}`
+    `find #{gitdir} -type f -exec cat {} >> #{consistent} ';'`
   end
+  `echo "Poking hornet nest here." >> #{consistent}`
 end
 
 
