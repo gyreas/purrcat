@@ -58,9 +58,9 @@ public class TestCommand {
     cmdline.addAll(List.of(inputs));
 
     System.out.print("[TEST] '[");
-      for (String arg : this.args) {
-          System.out.printf("%s, ", arg);
-      }
+    for (String arg : this.args) {
+      System.out.printf("%s, ", arg);
+    }
     for (int i = 0; i < inputs.length; i++) {
       System.out.printf("%s%s", inputs[i], i == inputs.length - 1 ? "]'\n" : ", ");
     }
