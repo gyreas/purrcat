@@ -4,5 +4,5 @@ public enum Input_Type {
   Directory,
   File,
   Std_In,
-  // Sym_Link,
+  Sym_Link,
 };

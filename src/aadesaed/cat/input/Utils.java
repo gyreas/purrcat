@@ -52,6 +52,7 @@ public class Utils {
     if (Files.notExists(p)) throw new NoSuchFileException(path);
     if (Files.isDirectory(p)) return Input_Type.Directory;
     else if (Files.isRegularFile(p)) return Input_Type.File;
+    else if (Files.isSymbolicLink(p)) return Input_Type.Sym_Link;
     else {
       throw new Purrcat_Exception.Unknown_File_Type(
           "Unknown filetype: " + Files.probeContentType(p));
