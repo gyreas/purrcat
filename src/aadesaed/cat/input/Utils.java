@@ -5,6 +5,8 @@ import static org.testng.Assert.assertNotSame;
 import aadesaed.cat.app.Output_Options;
 import aadesaed.cat.app.Output_Options.Numbering_Mode;
 import aadesaed.cat.app.Output_State;
+import aadesaed.cat.app.Purrcat_Exception;
+import aadesaed.cat.app.Purrcat_Exception.Is_Directory;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -13,6 +15,10 @@ import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.testng.annotations.Test;
 
 public class Utils {
@@ -23,11 +29,13 @@ public class Utils {
   }
 
   public static void cat_Path(String path, Output_State state, Output_Options options)
-      throws IOException {
+      throws IOException, Purrcat_Exception {
     if (get_Input_Type(path) == Input_Type.Std_In) {
       ReadableByteChannel stdin = Channels.newChannel(System.in);
       Input_Handle handle = new Input_Handle(stdin, false);
       cat_Handle(handle, state, options);
+    } else if (get_Input_Type(path) == Input_Type.Directory) {
+      throw new Is_Directory(path + ": Is a directory.");
     } else {
       FileChannel file = new FileInputStream(path).getChannel();
       Input_Handle handle = new Input_Handle(file, false);
@@ -35,8 +43,17 @@ public class Utils {
     }
   }
 
-  public static Input_Type get_Input_Type(String path) {
-    return path.equals("-") ? Input_Type.Std_In : Input_Type.File;
+  public static Input_Type get_Input_Type(String path) throws IOException, Purrcat_Exception {
+    if (path.equals("-")) return Input_Type.Std_In;
+
+    Path p = Paths.get(path);
+    if (Files.notExists(p)) throw new NoSuchFileException(path);
+    if (Files.isDirectory(p)) return Input_Type.Directory;
+    else if (Files.isRegularFile(p)) return Input_Type.File;
+    else {
+      throw new Purrcat_Exception.Unknown_File_Type(
+          "Unknown filetype: " + Files.probeContentType(p));
+    }
   }
 
   public static void write_Lines(Input_Handle handle, Output_State state, Output_Options options)
