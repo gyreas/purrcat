@@ -52,7 +52,7 @@ public class App {
         System.err.println("Permission denied: " + path);
         code = 1;
       } catch (Purrcat_Exception pe) {
-        System.err.println(pe.getLocalizedMessage());
+        System.err.println(path + ": " + pe.getLocalizedMessage());
         code = 1;
       }
     }

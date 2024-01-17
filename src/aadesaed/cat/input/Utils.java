@@ -8,8 +8,8 @@ import aadesaed.cat.app.Output_Options;
 import aadesaed.cat.app.Output_Options.Numbering_Mode;
 import aadesaed.cat.app.Output_State;
 import aadesaed.cat.app.Purrcat_Exception;
-import aadesaed.cat.app.Purrcat_Exception.Is_Directory;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
@@ -37,11 +37,13 @@ public class Utils {
         cat_Handle(handle, state, options);
       }
     } else if (it == Input_Type.Directory) {
-      throw new Is_Directory(path + ": Is a directory.");
+      throw new Purrcat_Exception.Is_Directory(path + ": Is a directory.");
     } else {
       try (FileChannel file = new FileInputStream(path).getChannel();
           Input_Handle handle = new Input_Handle(file, false)) {
         cat_Handle(handle, state, options);
+      } catch (/* This could be a fluke */ FileNotFoundException fnfe) {
+        throw new Purrcat_Exception.Too_Many_Symlinks();
       }
     }
   }

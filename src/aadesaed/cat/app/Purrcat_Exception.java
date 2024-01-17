@@ -24,4 +24,10 @@ public class Purrcat_Exception extends Exception {
       super("input file is output file");
     }
   }
+
+  public static class Too_Many_Symlinks extends Purrcat_Exception {
+    public Too_Many_Symlinks() {
+      super("Too many levels of symbolic links");
+    }
+  }
 }
