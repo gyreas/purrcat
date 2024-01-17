@@ -27,10 +27,10 @@ public class TestCommand {
   }
 
   private String cat_args() {
-    String a = "";
-    for (String arg : this.args) a += String.format("%s ", arg);
+    StringBuilder a = new StringBuilder();
+    for (String arg : this.args) a.append(String.format("%s ", arg));
 
-    return a;
+    return a.toString();
   }
 
   public void exec() {
@@ -66,7 +66,6 @@ public class TestCommand {
     }
 
     ProcessBuilder pb = new ProcessBuilder(cmdline);
-    pb.redirectErrorStream(true);
     try {
       Process process = pb.start();
       byte[] b = process.getInputStream().readAllBytes();
