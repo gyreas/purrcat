@@ -1,6 +1,0 @@
-# Dependencies
-# TODO: Auto-generate this file in the future
-
-jcommander-1.82
-slf4j-api-1.7.36
-testng-7.8.0
