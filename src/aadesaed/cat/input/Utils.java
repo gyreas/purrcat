@@ -11,7 +11,6 @@ import aadesaed.cat.app.Purrcat_Exception;
 import aadesaed.cat.app.Purrcat_Exception.Is_Directory;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
@@ -62,9 +61,8 @@ public class Utils {
   public static void write_Lines(Input_Handle handle, Output_State state, Output_Options options)
       throws IOException {
     int buf_Size = 1024 * 31; // TODO: 31kb? increase it mate!
-    PrintStream out = System.out;
-    WritableByteChannel writer = Channels.newChannel(out);
-    ByteBuffer in_Buf = ByteBuffer.allocate(buf_Size);
+    WritableByteChannel writer = Channels.newChannel(System.out);
+    ByteBuffer in_Buf = allocate(buf_Size);
 
     // each read
     int amt_Read = handle.read(in_Buf);
@@ -75,13 +73,13 @@ public class Utils {
         byte b = in_Buf.get(pos);
         // skip empty line_Number, enumerating them if possible
         if (state.skipped_Carriage_Return) {
-          out.write('\r');
+          System.out.write('\r');
           state.skipped_Carriage_Return = false;
           state.at_Line_Start = false;
         }
 
         if (b == '\n') {
-          write_Newline(out, state, options);
+          write_Newline(writer, state, options);
           pos++;
           state.at_Line_Start = true;
           continue;
@@ -89,7 +87,7 @@ public class Utils {
 
         state.one_Blank_Kept = false;
         if (state.at_Line_Start && options.number != Numbering_Mode.None) {
-          write_Line_Number(out, state.line_Number);
+          write_Line_Number(writer, state.line_Number);
           state.line_Number++;
         }
 
@@ -106,26 +104,26 @@ public class Utils {
         if (in_Buf.get(pos + offset) == '\r') {
           state.skipped_Carriage_Return = true;
         } else {
-          write_End_Of_Line(out, options.end_Of_Line().getBytes());
+          write_End_Of_Line(writer, options.end_Of_Line().getBytes());
           state.at_Line_Start = true;
         }
         pos += offset + 1;
       }
       in_Buf.clear();
       amt_Read = handle.read(in_Buf);
-      out.flush();
     }
   }
 
-  public static void write_End_Of_Line(PrintStream writer, byte[] end_Of_Line) throws IOException {
-    writer.write(end_Of_Line);
+  public static void write_End_Of_Line(WritableByteChannel writer, byte[] end_Of_Line)
+      throws IOException {
+    writer.write(wrap(end_Of_Line));
   }
 
   public static int write_End(WritableByteChannel writer, ByteBuffer buf, Output_Options options)
       throws IOException {
     int amt;
     if (options.show_Nonprint) {
-      amt = write_Nonprint_To_End(buf, options.tab().getBytes());
+      amt = write_Nonprint_To_End(writer, buf, options.tab().getBytes());
     } else if (options.show_Tabs) {
       amt = write_Tab_To_End(writer, buf);
     } else {
@@ -147,34 +145,34 @@ public class Utils {
     return len;
   }
 
-  public static int write_Nonprint_To_End(ByteBuffer buf, byte[] tab) throws IOException {
-    PrintStream writer = System.out;
+  public static int write_Nonprint_To_End(WritableByteChannel writer, ByteBuffer buf, byte[] tab)
+      throws IOException {
     int count = 0;
     int len = buf.remaining();
     for (int i = 0; i < len; ++i) {
       int b = Byte.toUnsignedInt(buf.get(i));
       if (b == (byte) '\n') break;
-      if (b == 9) writer.write(tab);
+      if (b == 9) System.out.write(tab);
       else if ((0 < b && b <= 8) || (10 <= b && b <= 31))
-        writer.write(new byte[] {'^', (byte) (b + 64)});
+        writer.write(wrap(new byte[] {'^', (byte) (b + 64)}));
       else if (32 <= b && b <= 126) {
-        writer.write(new byte[] {(byte) b});
-      } else if (b == 127) writer.write(new byte[] {'^', '?'});
+        writer.write(wrap(new byte[] {(byte) b}));
+      } else if (b == 127) writer.write(wrap(new byte[] {'^', '?'}));
       else if (128 <= (int) b && (int) b <= 159) {
-        writer.write(new byte[] {'M', '-', '^', (byte) (b - 64)});
+        writer.write(wrap(new byte[] {'M', '-', '^', (byte) (b - 64)}));
       } else if (160 <= (int) b && (int) b <= 254) {
-        writer.write(new byte[] {'M', '-', (byte) (b - 128)});
-      } else writer.write(new byte[] {'M', '-', '^', '?'});
+        writer.write(wrap(new byte[] {'M', '-', (byte) (b - 128)}));
+      } else writer.write(wrap(new byte[] {'M', '-', '^', '?'}));
 
       count++;
     }
     return count;
   }
 
-  public static void write_Newline(PrintStream writer, Output_State state, Output_Options options)
-      throws IOException {
+  public static void write_Newline(
+      WritableByteChannel writer, Output_State state, Output_Options options) throws IOException {
     if (state.skipped_Carriage_Return && options.show_Ends) {
-      writer.write("^M".getBytes());
+      writer.write(wrap("^M".getBytes()));
       state.skipped_Carriage_Return = false;
     }
 
@@ -184,13 +182,13 @@ public class Utils {
         write_Line_Number(writer, state.line_Number);
         state.line_Number++;
       }
-      writer.write(options.end_Of_Line().getBytes());
+      writer.write(wrap(options.end_Of_Line().getBytes()));
     }
   }
 
-  public static void write_Line_Number(PrintStream writer, int lineno) throws IOException {
+  public static void write_Line_Number(WritableByteChannel writer, int lineno) throws IOException {
     String line = String.format("%6d\t", lineno);
-    writer.write(line.getBytes());
+    writer.write(wrap(line.getBytes()));
   }
 
   public static int write_Tab_To_End(WritableByteChannel writer, ByteBuffer in_Buf)
@@ -203,7 +201,7 @@ public class Utils {
         byte b = in_Buf.get(pos);
         writer.write(in_Buf.slice(0, pos));
         if (b == '\t') {
-          System.out.write("^I".getBytes());
+          writer.write(wrap("^I".getBytes()));
           count += pos + 1;
         } else {
           // 10 ('\n') or 13 ('\r')
@@ -234,7 +232,7 @@ public class Utils {
   @Test
   public void can_Find_Tab_In_Buffer() {
     System.out.println("[TEST] [ Can find tab in buffer ]");
-    ByteBuffer buf = ByteBuffer.wrap("A\ttab".getBytes());
+    ByteBuffer buf = wrap("A\ttab".getBytes());
     assertNotSame(find_Tab_In_Buffer(buf), -1, "There's a tab in there.");
   }
 }
