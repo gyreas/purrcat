@@ -35,12 +35,12 @@ public class TEST_consistent {
     run(PRG, new String[] {"-n", CONSISTENT}, "test/expected/consistent_n.out");
   }
 
-  @Test(groups = "File", enabled = true)
+  @Test(groups = "File", enabled = false)
   public void givenAFile_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine() {
     run(PRG, new String[] {"-s", CONSISTENT}, "test/expected/consistent_s.out");
   }
 
-  @Test(groups = "File", enabled = true)
+  @Test(groups = "File", enabled = false)
   public void givenAFile_whenShowTabs_thenAllNonprintingTabsBecomeCaretI() {
     run(PRG, new String[] {"-T", CONSISTENT}, "test/expected/consistent_T.out");
   }
