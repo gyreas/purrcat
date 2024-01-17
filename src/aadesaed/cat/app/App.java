@@ -6,6 +6,8 @@ import static java.lang.System.exit;
 import aadesaed.cat.app.Output_Options.Numbering_Mode;
 import aadesaed.cat.cmdline.Args;
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
+import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 
 public class App {
@@ -14,15 +16,16 @@ public class App {
 
   public static void main(String[] args) throws IOException {
     Args config = Args.parse_args(args);
+    int code = 0;
 
     if (config.display_help) {
       print_Version();
       print_Usage();
-      exit(0);
+      exit(code);
     }
     if (config.display_version) {
       print_Version();
-      exit(0);
+      exit(code);
     }
 
     // TODO: combine this with Args.java to eliminate duplicate code
@@ -40,9 +43,20 @@ public class App {
     Output_State state = new Output_State();
     for (String path : files) {
       // check what file is.
-      // TODO: fix resource usage in this class
-      cat_Path(path, state, options);
+      try {
+        cat_Path(path, state, options);
+      } catch (NoSuchFileException nsfe) {
+        System.err.println("No such file or directory: " + path);
+        code = 1;
+      } catch (AccessDeniedException ade) {
+        System.err.println("Permission denied: " + path);
+        code = 1;
+      } catch (Purrcat_Exception pe) {
+        System.err.println(pe.getLocalizedMessage());
+        code = 1;
+      }
     }
+    exit(code);
   }
 
   private static void print_Usage() {

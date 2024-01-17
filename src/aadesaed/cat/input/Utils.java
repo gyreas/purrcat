@@ -1,5 +1,7 @@
 package aadesaed.cat.input;
 
+import static java.nio.ByteBuffer.allocate;
+import static java.nio.ByteBuffer.wrap;
 import static org.testng.Assert.assertNotSame;
 
 import aadesaed.cat.app.Output_Options;
@@ -13,7 +15,6 @@ import java.io.PrintStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
-import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -31,15 +32,17 @@ public class Utils {
   public static void cat_Path(String path, Output_State state, Output_Options options)
       throws IOException, Purrcat_Exception {
     if (get_Input_Type(path) == Input_Type.Std_In) {
-      ReadableByteChannel stdin = Channels.newChannel(System.in);
-      Input_Handle handle = new Input_Handle(stdin, false);
-      cat_Handle(handle, state, options);
+      try (var stdin = Channels.newChannel(System.in);
+          Input_Handle handle = new Input_Handle(stdin, false)) {
+        cat_Handle(handle, state, options);
+      }
     } else if (get_Input_Type(path) == Input_Type.Directory) {
       throw new Is_Directory(path + ": Is a directory.");
     } else {
-      FileChannel file = new FileInputStream(path).getChannel();
-      Input_Handle handle = new Input_Handle(file, false);
-      cat_Handle(handle, state, options);
+      try (FileChannel file = new FileInputStream(path).getChannel();
+          Input_Handle handle = new Input_Handle(file, false)) {
+        cat_Handle(handle, state, options);
+      }
     }
   }
 
@@ -112,7 +115,6 @@ public class Utils {
       amt_Read = handle.read(in_Buf);
       out.flush();
     }
-    handle.close();
   }
 
   public static void write_End_Of_Line(PrintStream writer, byte[] end_Of_Line) throws IOException {
