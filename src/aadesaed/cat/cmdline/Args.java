@@ -2,6 +2,7 @@ package aadesaed.cat.cmdline;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Args {
   /*
@@ -27,7 +28,7 @@ public class Args {
   public boolean squeeze_blank_lines;
 
   public Args() {
-    files = new ArrayList<>();
+    this.files = new ArrayList<>();
   }
 
   /** Return an Args with default values */
@@ -40,7 +41,7 @@ public class Args {
     config.display_line_numbers_nonblank = false;
     config.display_tabs = false;
     config.display_nonprinting = false;
-    config.files = new ArrayList<>();
+    config.files = new ArrayList<>(List.of("-"));
     return config;
   }
 

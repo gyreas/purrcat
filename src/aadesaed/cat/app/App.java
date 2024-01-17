@@ -70,29 +70,27 @@ public class App {
             "USAGE:",
             "    purrcat [options] [files]",
             "-----",
-            "-h, --help               display this help and exit",
-            "-n, --number             number all output lines",
-            "-b, --number-nonblank    number all nonempty output lines, overrides -n",
-            "-s, --squeeze-blank      suppress repeated empty output line",
-            "-T, --show-tabs          display TAB characters as ^I",
-            "-v, --show-nonprinting   use ^ and M- notation, except for LFD and TAB",
-            "-V, --version            output version information and exit",
-            NEWLINE,
+            "   -h, --help               display this help and exit",
+            "   -n, --number             number all output lines",
+            "   -b, --number-nonblank    number all nonempty output lines, overrides -n",
+            "   -s, --squeeze-blank      suppress repeated empty output line",
+            "   -T, --show-tabs          display TAB characters as ^I",
+            "   -v, --show-nonprinting   use ^ and M- notation, except for LFD and TAB",
+            "   -V, --version            output version information and exit",
+            "",
             "Examples:",
             "  purrcat f - g  Output f's contents, then standard input, then g's contents.",
             "  purrcat        Copy standard input to standard output. ",
             NEWLINE);
 
-    System.out.printf("%s\n", usage);
+    System.out.print(usage);
   }
 
   private static String app_Meta() {
-    return String.format("author: %s\n", PROPS.get_Author())
-        + String.format("license: %s\n", PROPS.get_License());
+    return "author: " + PROPS.get_Author() + "license: " + PROPS.get_License() + NEWLINE;
   }
 
   private static void print_Version() {
-    String version = PROPS.get_Version();
-    System.out.printf("%s", String.format("%s %s\n", PROPS.get_App_Name(), version));
+    System.out.printf("%s", String.format("%s %s\n", PROPS.get_App_Name(), PROPS.get_Version()));
   }
 }
