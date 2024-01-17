@@ -30,12 +30,13 @@ public class Utils {
 
   public static void cat_Path(String path, Output_State state, Output_Options options)
       throws IOException, Purrcat_Exception {
-    if (get_Input_Type(path) == Input_Type.Std_In) {
+    Input_Type it = get_Input_Type(path);
+    if (it == Input_Type.Std_In) {
       try (var stdin = Channels.newChannel(System.in);
           Input_Handle handle = new Input_Handle(stdin, false)) {
         cat_Handle(handle, state, options);
       }
-    } else if (get_Input_Type(path) == Input_Type.Directory) {
+    } else if (it == Input_Type.Directory) {
       throw new Is_Directory(path + ": Is a directory.");
     } else {
       try (FileChannel file = new FileInputStream(path).getChannel();
