@@ -1,9 +1,7 @@
-/.idea
 /*.java
 /docs
 /out
 *.class
-purrcat.iml
 test/expected
 target
 benchmarking

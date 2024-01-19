@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a8909cde-89c2-464b-9e39-dc175655a39f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.sh" beforeDir="false" afterPath="$PROJECT_DIR$/app.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/aadesaed/cat/app/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/aadesaed/cat/app/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/aadesaed/cat/app/Purrcat_Exception.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/aadesaed/cat/app/Purrcat_Exception.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/aadesaed/cat/input/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/aadesaed/cat/input/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/TestAll.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test/TestAll.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/consistent/consistent.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/consistent/consistent.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/test/TEST_multiple.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/test/TestCommand.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/test/empty/TEST_empty.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="JavaAutoRunManager">
+    <enabled-run-configurations>
+      <run-configuration type="TestNG" name="App.givenAFile_whenFileIsAlsoOutputAndNonempty_thenComplain" />
+    </enabled-run-configurations>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2aP2cMfntQsI3FwclJA6C13IjRT" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.App.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JAR Application.purrcat-0.0.4-SNAPSHOT.jar.executor": "Run",
+    "Makefile Target.$(PURR)/app/App.class.executor": "Run",
+    "Makefile Target.Makefile.executor": "Run",
+    "Makefile Target.build.executor": "Run",
+    "Makefile Target.clean.executor": "Run",
+    "Makefile Target.package.executor": "Run",
+    "Makefile Target.setup.executor": "Run",
+    "Makefile Target.test.executor": "Run",
+    "Makefile Target.tests.executor": "Run",
+    "Maven.purrcat [clean].executor": "Run",
+    "Maven.purrcat [compile].executor": "Run",
+    "Maven.purrcat [deploy].executor": "Run",
+    "Maven.purrcat [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor": "Run",
+    "Maven.purrcat [org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile].executor": "Run",
+    "Maven.purrcat [org.apache.maven.plugins:maven-compiler-plugin:3.11.0:testCompile].executor": "Run",
+    "Maven.purrcat [org.apache.maven.plugins:maven-jar-plugin:3.1.0:jar].executor": "Run",
+    "Maven.purrcat [package].executor": "Run",
+    "Maven.purrcat [validate].executor": "Run",
+    "Maven.purrcat [verify].executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TestNG./home/saed/Projects/purrcat/test/TestAll.xml.executor": "Run",
+    "TestNG./home/saed/learnings/java/purrcat/TestAll.xml.executor": "Run",
+    "TestNG./home/saed/learnings/java/purrcat/testng.xml.executor": "Run",
+    "TestNG.<default>.executor": "Run",
+    "TestNG.App.can_Find_Tab_In_Buffer.executor": "Run",
+    "TestNG.App.givenAFile_whenFileIsAlsoOutputAndNonempty_thenComplain.executor": "Debug",
+    "TestNG.TEST_consistent.executor": "Run",
+    "TestNG.TEST_consistent.givenAFile_whenNoOptions_thenNoExternalCharactersInOutput.executor": "Run",
+    "TestNG.TEST_consistent.givenAFile_whenNumberOnlyNonblankLines_thenNumberOnlyNonblankLines.executor": "Run",
+    "TestNG.TEST_consistent.givenAFile_whenShowLineNumber_thenPrependLinesWithLineNumbers.executor": "Run",
+    "TestNG.TEST_consistent.givenAFile_whenShowTabs_thenAllNonprintingTabsBecomeCaretI.executor": "Run",
+    "TestNG.TEST_consistent.givenAFile_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine.executor": "Run",
+    "TestNG.TEST_empty.executor": "Debug",
+    "TestNG.TEST_empty.givenStdin_whenNoOptions_thenNoExternalCharactersInOutput.executor": "Run",
+    "TestNG.TEST_fox.givenStdin_whenNoOptions_thenNoExternalCharactersInOutput.executor": "Run",
+    "TestNG.TEST_fox.givenStdin_whenNumberOnlyNonblankLines_thenPrependNonblankLinesWithLineNumber.executor": "Run",
+    "TestNG.TEST_multiple.executor": "Run",
+    "TestNG.TEST_multiple.givenMultipleFilesOnStdin_whenShowLineNumberNonblankLines_thenNumberEachNonblankLineConsecutively.executor": "Run",
+    "TestNG.TEST_multiple.givenMultipleFiles_whenShowLineNumberNonblankLines_thenNumberEachNonblankLineConsecutively.executor": "Debug",
+    "TestNG.TEST_multiple.givenMultipleFiles_whenShowLineNumber_thenNumberEachLineConsecutively.executor": "Run",
+    "TestNG.TEST_tabbed.givenStdin_whenNoOptions_thenNoExternalCharactersInOutput.executor": "Run",
+    "TestNG.TEST_three.givenStdin_whenNoOptions_thenNoExternalCharactersInOutput.executor": "Debug",
+    "TestNG.TEST_three.givenStdin_whenNumberOnlyNonblankLines_thenPrependNonblankLinesWithLineNumber.executor": "Run",
+    "TestNG.TEST_three.givenStdin_whenShowLineNumber_thenPrependLinesWithLineNumbers.executor": "Debug",
+    "TestNG.TestAll.executor": "Run",
+    "TestNG.Unnamed.executor": "Run",
+    "TestNG.Utils.executor": "Run",
+    "git-widget-placeholder": "output-input",
+    "jdk.selected.JAVA_MODULE": "17",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/saed/Projects/purrcat/lib",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.2197183",
+    "project.structure.side.proportion": "0.20114942",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="RunManager" selected="TestNG.App.givenAFile_whenFileIsAlsoOutputAndNonempty_thenComplain">
+    <configuration name="App" type="Application" factoryName="Application" nameIsGenerated="true" show_console_on_std_out="true">
+      <output_file path="d" />
+      <option name="MAIN_CLASS_NAME" value="aadesaed.cat.app.App" />
+      <module name="purrcat" />
+      <option name="PROGRAM_PARAMETERS" value="app.sh app.sh" />
+      <option name="REDIRECT_INPUT" value="true" />
+      <option name="INPUT_FILE" value="$PROJECT_DIR$/format-all.sh" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="aadesaed.cat.app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Makefile" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
+      <makefile filename="$PROJECT_DIR$/Makefile" target="" workingDirectory="" arguments="">
+        <envs />
+      </makefile>
+      <method v="2" />
+    </configuration>
+    <configuration name="clean" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
+      <makefile filename="$PROJECT_DIR$/Makefile" target="clean" workingDirectory="" arguments="">
+        <envs />
+      </makefile>
+      <method v="2" />
+    </configuration>
+    <configuration name="package" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
+      <makefile filename="$PROJECT_DIR$/Makefile" target="package" workingDirectory="" arguments="">
+        <envs />
+      </makefile>
+      <method v="2" />
+    </configuration>
+    <configuration name="App.givenAFile_whenFileIsAlsoOutputAndNonempty_thenComplain" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="purrcat" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="aadesaed.cat.app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="aadesaed.cat.app" />
+      <option name="MAIN_CLASS_NAME" value="aadesaed.cat.app.App" />
+      <option name="METHOD_NAME" value="givenAFile_whenFileIsAlsoOutputAndNonempty_thenComplain" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TEST_consistent.givenAFile_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="purrcat" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="aadesaed.cat.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="aadesaed.cat" />
+      <option name="MAIN_CLASS_NAME" value="aadesaed.cat.TEST_consistent" />
+      <option name="METHOD_NAME" value="givenAFile_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestAll" type="TestNG">
+      <shortenClasspath name="NONE" />
+      <useClassPathOnly />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="aadesaed.cat.cmdline.Args" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+        <pattern>
+          <option name="PATTERN" value="aadesaed.cat.app.App" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+        <pattern>
+          <option name="PATTERN" value="aadesaed.cat.input.ReadFile" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="SUITE_NAME" value="$PROJECT_DIR$/test/TestAll.xml" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="GROUP_NAME" value="" />
+      <option name="TEST_OBJECT" value="SUITE" />
+      <option name="PARAMETERS" value="" />
+      <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/test-output" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <option name="PROPERTIES_FILE" value="" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Unnamed" type="TestNG" nameIsGenerated="true">
+      <shortenClasspath name="NONE" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="SUITE_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="GROUP_NAME" value="Stdin" />
+      <option name="TEST_OBJECT" value="GROUP" />
+      <option name="PARAMETERS" value="" />
+      <option name="OUTPUT_DIRECTORY" value="" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <option name="PROPERTIES_FILE" value="" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.App" />
+      <item itemvalue="Makefile Target.clean" />
+      <item itemvalue="Makefile Target.package" />
+      <item itemvalue="Makefile Target.Makefile" />
+      <item itemvalue="TestNG.Unnamed" />
+      <item itemvalue="TestNG.TestAll" />
+      <item itemvalue="TestNG.App.givenAFile_whenFileIsAlsoOutputAndNonempty_thenComplain" />
+      <item itemvalue="TestNG.TEST_consistent.givenAFile_whenSqueezeBlankLine_thenConsecutiveBlankLinesBecomeSingleLine" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="TestNG.App.givenAFile_whenFileIsAlsoOutputAndNonempty_thenComplain" />
+        <item itemvalue="Makefile Target.package" />
+        <item itemvalue="Makefile Target.clean" />
+        <item itemvalue="Makefile Target.clean" />
+        <item itemvalue="Makefile Target.package" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-ab7203c4" />
+        <option value="jdk-17.0.9-corretto-17.0.9-4caba194b151-3c5dfc45" />
+        <option value="jdk-17.0.9-corretto-17.0.9-e1d2075fd9a7-d4e022e8" />
+        <option value="jdk-17.0.9-corretto-17.0.9-f644763e9732-220112af" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a8909cde-89c2-464b-9e39-dc175655a39f" name="Changes" comment="" />
+      <created>1704205971890</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1704205971890</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/test/TestCommand.java</url>
+          <line>120</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/test/empty/TEST_empty.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/test/three/TEST_three.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/test/TEST_multiple.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/test/TESTHelpers.java</url>
+          <line>47</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/aadesaed/cat/app/App.java</url>
+          <line>105</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/aadesaed/cat/app/App.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/test/TEST_multiple.java</url>
+          <line>41</line>
+          <properties class="aadesaed.cat.TEST_multiple" method="givenMultipleFilesOnStdin_whenShowLineNumberNonblankLines_thenNumberEachNonblankLineConsecutively">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/aadesaed/cat/input/Utils.java</url>
+          <line>37</line>
+          <properties class="aadesaed.cat.input.Utils" method="cat_Path">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="java.nio.HeapByteBuffer" memberName="hb" />
+        <PinnedItemInfo parentTag="java.io.BufferedOutputStream" memberName="buf" />
+        <PinnedItemInfo parentTag="java.nio.channels.Channels$WritableByteChannelImpl" memberName="buf" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/purrcat$TEST_empty_givenStdin_whenNoOptions_thenNoExternalCharactersInOutput.ic" NAME="TEST_empty.givenStdin_whenNoOptions_thenNoExternalCharactersInOutput Coverage Results" MODIFIED="1705331026617" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>aadesaed.cat.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/purrcat$App.ic" NAME="App Coverage Results" MODIFIED="1704574978796" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>aadesaed.cat.app.*</FILTER>
+      <FILTER>consistent.*</FILTER>
+      <FILTER>dummy.*</FILTER>
+      <FILTER>empty.*</FILTER>
+      <FILTER>expected.*</FILTER>
+      <FILTER>fox.*</FILTER>
+      <FILTER>spiders.*</FILTER>
+      <FILTER>tabbed.*</FILTER>
+      <FILTER>thebustle.*</FILTER>
+      <FILTER>three.*</FILTER>
+    </SUITE>
+  </component>
+</project>
