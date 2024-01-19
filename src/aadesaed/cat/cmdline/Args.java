@@ -87,19 +87,51 @@ public class Args {
         config.files.add(arg);
         args.remove(i);
       } else if (arg.startsWith("-")) {
-        System.out.printf(
-            "purrcat: '%s' is an invalid option.\n",
-            arg.startsWith("--") ? arg.replaceFirst("--", "") : arg.replaceFirst("-", ""));
-        System.out.println("Try 'purrcat --help' for available options.");
-        System.exit(1);
+        String rest = arg.substring(1);
+        args.remove(i);
+        if (rest.chars().anyMatch(c -> "TVbhnsv".contains(Character.toString(c)))) {
+          done:
+          for (int a = 0; a < rest.length(); a++) {
+            char first = rest.charAt(a);
+            if (first == 'h') {
+              config.display_help = true;
+            } else if (first == 'V') {
+              config.display_version = true;
+            } else if (first == 'v') {
+              config.display_nonprinting = true;
+            } else if (first == 's') {
+              config.squeeze_blank_lines = true;
+            } else if (first == 'n') {
+              config.display_line_numbers = true;
+            } else if (first == 'b') {
+              config.display_line_numbers_nonblank = true;
+            } else if (first == 'T') {
+              config.display_tabs = true;
+            } else {
+              invalid_Option(Character.toString(first));
+              break done;
+            }
+          }
+        } else {
+          invalid_Option(arg.substring(1, 2));
+        }
       } else {
         config.files.add(arg);
         args.remove(i);
       }
     }
 
+    /* Default to standard input when no file was specified. */
     if (config.files.isEmpty()) config.files.add("-");
 
     return config;
+  }
+
+  private static void invalid_Option(String arg) {
+    System.out.printf(
+        "purrcat: '%s' is an invalid option.\n",
+        arg.startsWith("--") ? arg.replaceFirst("--", "") : arg.replaceFirst("-", ""));
+    System.out.println("Try 'purrcat --help' for available options.");
+    System.exit(1);
   }
 }
