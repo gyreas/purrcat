@@ -18,7 +18,8 @@ It's a toy program to improve my familiarity with the Java ecosystem.
 - [x] add the main branch after test suites is up
 - [x] implement file i/o etc
 - [x] implement feature's of Unix cat, so that this cat can purr.
-- [ ] Majestic error/exception handling
+- [x] Majestic error/exception handling
+- [ ] Detect if output file is among input files to avoid blowing the file size.
 - [ ] reading from stdin and
   - [x] stdin
   - [ ] sockets
