@@ -19,8 +19,8 @@ public class Purrcat_Exception extends Exception {
     }
   }
 
-  public static class Output_Is_Input extends Purrcat_Exception {
-    public Output_Is_Input() {
+  public static class Input_Is_Output extends Purrcat_Exception {
+    public Input_Is_Output() {
       super("input file is output file");
     }
   }
