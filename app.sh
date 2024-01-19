@@ -1,14 +1,16 @@
+#!/usr/bin/env -S bash
+
+##
+# For testing the app given the jnr dependencies, this is necessary otherwise it breaks.
+## 
+LIBS=$(fd . -e jar lib/)
 CP="$(pwd)/target/classes"
 
-java -ea -cp $CP aadesaed.cat.app.App "$@"
+JARS=
+for jar in $LIBS; do 
 
-# if [ ! $TEST ]; then
-#   n=$(fd . -e jar target/ | wc -l)
-#   if [[ $n > 1 ]]; then 
-#     echo "More than one jars, run manually"
-#   else
-#     jar=$(fd . -e jar "target/")
-#     java -jar $jar "$@"
-#   fi
-# else
-# fi
+  JARS="$JARS:$jar/"
+
+done
+
+java -ea -cp $CP:$JARS aadesaed.cat.app.App "$@"
