@@ -8,7 +8,6 @@ import aadesaed.cat.app.Output_Options;
 import aadesaed.cat.app.Output_Options.Numbering_Mode;
 import aadesaed.cat.app.Output_State;
 import aadesaed.cat.app.Purrcat_Exception;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -22,12 +21,19 @@ import java.nio.file.Paths;
 import org.testng.annotations.Test;
 
 public class Utils {
+  private static final int BUF_SIZE = 1024 * 32;
 
-  public static void cat_Handle(Input_Handle handle, Output_State state, Output_Options options)
-      throws IOException {
-    write_Lines(handle, state, options);
-  }
-
+  /**
+   * Concatenates the content of each path to standard output based on {@code state} and {@code
+   * options}.
+   *
+   * @param path file path as string
+   * @param state output state
+   * @param options output options
+   * @throws IOException if an I/O error occurs
+   * @throws Purrcat_Exception if the given path is either a directory, or deeply-nested symbolic
+   *     link, which may be a fluke
+   */
   public static void cat_Path(String path, Output_State state, Output_Options options)
       throws IOException, Purrcat_Exception {
     Input_Type it = get_Input_Type(path);
@@ -39,7 +45,7 @@ public class Utils {
     } else if (it == Input_Type.Directory) {
       throw new Purrcat_Exception.Is_Directory(path + ": Is a directory.");
     } else {
-      try (FileChannel file = new FileInputStream(path).getChannel();
+      try (FileChannel file = (FileChannel) Files.newByteChannel(Paths.get(path));
           Input_Handle handle = new Input_Handle(file, false)) {
         cat_Handle(handle, state, options);
       } catch (/* This could be a fluke */ FileNotFoundException fnfe) {
@@ -48,7 +54,26 @@ public class Utils {
     }
   }
 
-  public static Input_Type get_Input_Type(String path) throws IOException, Purrcat_Exception {
+  /**
+   * Concatenates the handle to standard output based on {@code state} and {@code options}.
+   *
+   * @param handle input handle to write to standard output
+   * @param state output state
+   * @param options output options
+   * @throws IOException if an I/O error occurs
+   */
+  private static void cat_Handle(Input_Handle handle, Output_State state, Output_Options options)
+      throws IOException {
+    write_Lines(handle, state, options);
+  }
+
+  /**
+   * Determine the type of filesystem object from the given path.
+   *
+   * @param path file path as string
+   * @return filesystem object type
+   */
+  private static Input_Type get_Input_Type(String path) throws IOException, Purrcat_Exception {
     if (path.equals("-")) return Input_Type.Std_In;
 
     Path p = Paths.get(path);
@@ -62,11 +87,26 @@ public class Utils {
     }
   }
 
-  public static void write_Lines(Input_Handle handle, Output_State state, Output_Options options)
+  /**
+   * Using some exotic method to write fast when no input or arguments are provided.
+   *
+   * @param handle the handle to read
+   * @param state output state
+   * @param options output options
+   */
+  private static void write_fast(Input_Handle handle, Output_State state, Output_Options options) {}
+
+  /**
+   * Write the stream to stdout line by line.
+   *
+   * @param handle the handle to read
+   * @param state output state
+   * @param options output options
+   */
+  private static void write_Lines(Input_Handle handle, Output_State state, Output_Options options)
       throws IOException {
-    int buf_Size = 1024 * 31; // TODO: 31kb? increase it mate!
     WritableByteChannel writer = Channels.newChannel(System.out);
-    ByteBuffer in_Buf = allocate(buf_Size);
+    ByteBuffer in_Buf = allocate(BUF_SIZE);
 
     // each read
     int amt_Read = handle.read(in_Buf);
@@ -97,8 +137,9 @@ public class Utils {
 
         // dump everything else
         int len = amt_Read - pos;
-        // slicing is relative to zero index of the buffer, not relative to the current
-        // position
+        /* slicing is relative to zero index of the buffer, not relative to the current
+         * position
+         */
         int offset = write_End(writer, in_Buf.slice(pos, len), options);
         // end of buffer?
         if (pos + offset == amt_Read) {
@@ -118,12 +159,12 @@ public class Utils {
     }
   }
 
-  public static void write_End_Of_Line(WritableByteChannel writer, byte[] end_Of_Line)
+  private static void write_End_Of_Line(WritableByteChannel writer, byte[] end_Of_Line)
       throws IOException {
     writer.write(wrap(end_Of_Line));
   }
 
-  public static int write_End(WritableByteChannel writer, ByteBuffer buf, Output_Options options)
+  private static int write_End(WritableByteChannel writer, ByteBuffer buf, Output_Options options)
       throws IOException {
     int amt;
     if (options.show_Nonprint) {
@@ -136,7 +177,7 @@ public class Utils {
     return amt;
   }
 
-  public static int write_To_End(WritableByteChannel writer, ByteBuffer buf) throws IOException {
+  private static int write_To_End(WritableByteChannel writer, ByteBuffer buf) throws IOException {
     int len = buf.remaining();
     for (int i = 0; i < len; i++) {
       byte b = buf.get(i);
@@ -149,7 +190,7 @@ public class Utils {
     return len;
   }
 
-  public static int write_Nonprint_To_End(WritableByteChannel writer, ByteBuffer buf, byte[] tab)
+  private static int write_Nonprint_To_End(WritableByteChannel writer, ByteBuffer buf, byte[] tab)
       throws IOException {
     int count = 0;
     int len = buf.remaining();
@@ -173,7 +214,7 @@ public class Utils {
     return count;
   }
 
-  public static void write_Newline(
+  private static void write_Newline(
       WritableByteChannel writer, Output_State state, Output_Options options) throws IOException {
     if (state.skipped_Carriage_Return && options.show_Ends) {
       writer.write(wrap("^M".getBytes()));
@@ -190,12 +231,12 @@ public class Utils {
     }
   }
 
-  public static void write_Line_Number(WritableByteChannel writer, int lineno) throws IOException {
+  private static void write_Line_Number(WritableByteChannel writer, int lineno) throws IOException {
     String line = String.format("%6d\t", lineno);
     writer.write(wrap(line.getBytes()));
   }
 
-  public static int write_Tab_To_End(WritableByteChannel writer, ByteBuffer in_Buf)
+  private static int write_Tab_To_End(WritableByteChannel writer, ByteBuffer in_Buf)
       throws IOException {
     int count = 0;
     int len = in_Buf.remaining();
@@ -222,6 +263,12 @@ public class Utils {
     }
   }
 
+  /**
+   * Find the next tab or EOL character in the given buffer.
+   *
+   * @param buffer the buffer to scan.
+   * @return index in the buffer, -1 otherwise.
+   */
   private static int find_Tab_In_Buffer(ByteBuffer buffer) {
     int len = buffer.remaining();
     for (int i = 0; i < len; i++) {
