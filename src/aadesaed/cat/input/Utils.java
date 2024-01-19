@@ -19,9 +19,16 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import jnr.posix.FileStat;
+import jnr.posix.POSIX;
+import jnr.posix.POSIXFactory;
 import org.testng.annotations.Test;
 
 public class Utils {
+  private static final POSIX posix = POSIXFactory.getNativePOSIX();
+
+  /** File descriptor of the (current) standard output stream. */
+  private static final int STDOUT_FD = 1;
 
   public static void cat_Handle(Input_Handle handle, Output_State state, Output_Options options)
       throws IOException {
@@ -39,6 +46,11 @@ public class Utils {
     } else if (it == Input_Type.Directory) {
       throw new Purrcat_Exception.Is_Directory(path + ": Is a directory.");
     } else {
+      /* File Statistics of the redirect file. */
+      FileStat out_Stat = posix.fstat(STDOUT_FD);
+      FileStat file_Stat = posix.stat(path);
+      if (!out_Stat.isEmpty() && file_Stat.isIdentical(out_Stat))
+        throw new Purrcat_Exception.Input_Is_Output();
       try (FileChannel file = new FileInputStream(path).getChannel();
           Input_Handle handle = new Input_Handle(file, false)) {
         cat_Handle(handle, state, options);
