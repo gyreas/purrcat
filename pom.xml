@@ -5,7 +5,7 @@
 
   <groupId>aadesaed.cat.app</groupId>
   <artifactId>purrcat</artifactId>
-  <version>0.0.5</version>
+  <version>0.0.6</version>
   <packaging>jar</packaging>
   <name>purrcat</name>
   <description>
