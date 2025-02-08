@@ -21,9 +21,9 @@ import java.nio.file.Paths;
 import org.testng.annotations.Test;
 
 public class Utils {
-  static {
-    System.loadLibrary("fstat");
-  }
+  // static {
+  //   System.loadLibrary("fstat");
+  // }
 
   private static native void checkFdPath(int fd, String path);
 

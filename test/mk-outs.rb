@@ -3,7 +3,7 @@ projectdir = Dir.pwd
 gitdir     = "#{projectdir}/.git"
 root       = ENV["TESTPATH"]
 outdir     = "expected"
-all        = "consistent dummy empty tabbed three"
+all        = "dummy empty tabbed three"
 
 # Enter test directory
 if !root.nil?
@@ -20,15 +20,20 @@ end
 # generate a large file for consistency check
 consistent = "consistent/consistent.txt"
 
-# backup the template
-tmp = "#{consistent}.tmp"
-if File.size?(consistent) < 1024 
-  File.copy_stream(consistent, tmp)
-  size = 10 * 1024 * 1024
-  while File.size?(consistent) <= size do
-    `find #{gitdir} -type f -exec cat {} >> #{consistent} ';'`
+if ENV['NO_CONST'] == "y"
+  puts "[INFO] NO_CONST=y: not generating consistency expects"
+else
+  # backup the template
+  tmp = "#{consistent}.tmp"
+  if File.size?(consistent) < 1024 
+    File.copy_stream(consistent, tmp)
+    size = 10 * 1024 * 1024
+    while File.size?(consistent) <= size do
+      `find #{gitdir} -type f -exec cat {} >> #{consistent} ';'`
+    end
+    `echo "[INFO] Poking hornet nest here." >> #{consistent}`
   end
-  `echo "Poking hornet nest here." >> #{consistent}`
+  all += " consistent "
 end
 
 
