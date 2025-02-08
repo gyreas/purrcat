@@ -53,7 +53,7 @@ public class App {
         code = 1;
       } catch (Purrcat_Exception pe) {
         System.err.println(path + ": " + pe.getLocalizedMessage());
-        code = 1;
+        exit(1);
       }
     }
     exit(code);
