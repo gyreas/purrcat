@@ -14,7 +14,7 @@ CFLAGS      := -O3 -g0 -Wall -Werror -Wpedantic -std=c89 -fPIC -shared -I$(NATIV
 LIB         := libpurrcatfstat.so
 NAME        := aadesaed.cat.app.App
 LIBSO       := $(TARGETDIR)/$(LIB)
-SCRIPT      := purrcat
+SCRIPT      := $(TARGETDIR)/purrcat
 # infoing
 INFO        := "[INFO]"
 NEWLINE     := "$(INFO) ------------------------------------------------------------------------"
@@ -76,11 +76,12 @@ package: setup $(LIBSO)
 	@echo "$(INFO) ----------------------------< POST PACKAGE >----------------------------"
 
 	@echo "$(INFO) Transporting artifacts for the package"
-	if [ ! -d "$(TARGETDIR)/$(ARTIFACT)" ]; then mkdir "$(TARGETDIR)/$(ARTIFACT)"; fi
-	@cd "$(TARGETDIR)/$(ARTIFACT)";   \
-	jar -xf "../$(PACKAGE)";          \
-	cp $(LIBSO) META-INF;             \
-	jar -c -f $(PACKAGE) *;
+	rm "$(TARGETDIR)/$(ARTIFACT)" || true
+	mkdir "$(TARGETDIR)/$(ARTIFACT)"
+	cd "$(TARGETDIR)/$(ARTIFACT)";   \
+	jar -xf "../$(PACKAGE)";         \
+	cp $(LIBSO) ./META-INF/;         \
+	jar -c -f ../$(PACKAGE) .;
 
 	@printf "$(INFO) "
 	printf "java -cp %s %s \$$@\n" $(TARGETDIR)/$(PACKAGE) $(NAME) > $(SCRIPT)
