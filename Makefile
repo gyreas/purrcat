@@ -76,8 +76,10 @@ package: setup $(LIBSO)
 	@echo "$(INFO) ----------------------------< POST PACKAGE >----------------------------"
 
 	@echo "$(INFO) Transporting artifacts for the package"
-	rm "$(TARGETDIR)/$(ARTIFACT)" || true
-	mkdir "$(TARGETDIR)/$(ARTIFACT)"
+	@rm "$(TARGETDIR)/$(ARTIFACT)" 2> /dev/null || true
+	@mkdir "$(TARGETDIR)/$(ARTIFACT)"
+
+	@printf "$(INFO) "
 	cd "$(TARGETDIR)/$(ARTIFACT)";   \
 	jar -xf "../$(PACKAGE)";         \
 	cp $(LIBSO) ./META-INF/;         \

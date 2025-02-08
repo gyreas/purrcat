@@ -4,7 +4,7 @@
 #include <sys/types.h>
 #include "fstat.h"
 
-JNIEXPORT void JNICALL Java_aadesaed_cat_input_Utils_checkFdPath
+JNIEXPORT void JNICALL Java_aadesaed_cat_app_App_checkFdPath
   (JNIEnv *env, jobject obj_ptr, jint fd, jstring jpath)
 {
     ino_t        out_ino, file_ino;
@@ -30,7 +30,7 @@ JNIEXPORT void JNICALL Java_aadesaed_cat_input_Utils_checkFdPath
     file_ino = file_statbuf.st_ino;
 
     if (sizeof(out_statbuf) != 0 && out_dev == file_dev && out_ino == file_ino) {
-        iio_exception = (*env)->FindClass(env, "Laadesaed/cat/app/Purrcat_Exception$Input_Is_Output;");
+        iio_exception = (*env)->FindClass(env, "Laadesaed/cat/app/PurrcatException$InputIsOutput;");
 		if (!iio_exception) {
 			fprintf(stderr, "Could not create exception.\n");
 			exit(EXIT_FAILURE);
