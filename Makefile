@@ -79,9 +79,8 @@ package: setup $(LIBSO)
 	if [ ! -d "$(TARGETDIR)/$(ARTIFACT)" ]; then mkdir "$(TARGETDIR)/$(ARTIFACT)"; fi
 	@cd "$(TARGETDIR)/$(ARTIFACT)";   \
 	jar -xf "../$(PACKAGE)";          \
-	cd ..;                            \
-	cp $(LIBSO) $(ARTIFACT)/META-INF; \
-	jar -c -f $(PACKAGE) $(ARTIFACT);
+	cp $(LIBSO) META-INF;             \
+	jar -c -f $(PACKAGE) *;
 
 	@printf "$(INFO) "
 	printf "java -cp %s %s \$$@\n" $(TARGETDIR)/$(PACKAGE) $(NAME) > $(SCRIPT)

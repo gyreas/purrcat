@@ -46,7 +46,7 @@ public class App {
     Output_State state = new Output_State();
 
     String no_jar = System.getenv("NO_JAR");
-    if (no_jar.equals("1")) {
+    if (no_jar != null && no_jar.equals("1")) {
       System.loadLibrary("purrcatfstat");
     } else {
       Path dest = Paths.get(System.getProperty("user.home"), ".local/state");
