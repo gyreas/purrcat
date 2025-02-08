@@ -18,16 +18,18 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import jnr.posix.FileStat;
-import jnr.posix.POSIX;
-import jnr.posix.POSIXFactory;
 import org.testng.annotations.Test;
 
 public class Utils {
-  private static final POSIX posix = POSIXFactory.getNativePOSIX();
+  // static {
+  //   System.loadLibrary("fstat");
+  // }
+
+  private static native void checkFdPath(int fd, String path);
 
   /** File descriptor of the (current) standard output stream. */
   private static final int STDOUT_FD = 1;
+
   private static final int BUF_SIZE = 1024 * 32;
 
   /**
@@ -53,10 +55,7 @@ public class Utils {
       throw new Purrcat_Exception.Is_Directory(path + ": Is a directory.");
     } else {
       /* File Statistics of the redirect file. */
-      FileStat out_Stat = posix.fstat(STDOUT_FD);
-      FileStat file_Stat = posix.stat(path);
-      if (!out_Stat.isEmpty() && file_Stat.isIdentical(out_Stat))
-        throw new Purrcat_Exception.Input_Is_Output();
+      checkFdPath(STDOUT_FD, path);
       try (FileChannel file = (FileChannel) Files.newByteChannel(Paths.get(path));
           Input_Handle handle = new Input_Handle(file, false)) {
         cat_Handle(handle, state, options);

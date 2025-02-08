@@ -55,17 +55,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <app.dir>src/aadesaed/cat/app</app.dir>
+        <app.dir>src/java/aadesaed/cat/app</app.dir>
         <app.resources>${app.dir}/resources</app.resources>
         <app.license>MPL-2.0</app.license>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.github.jnr</groupId>
-            <artifactId>jnr-posix</artifactId>
-            <version>3.1.18</version>
-        </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -83,7 +78,6 @@
         <resources>
             <resource>
                 <directory>${app.resources}</directory>
-                <filtering>true</filtering>
             </resource>
         </resources>
         <plugins>
@@ -115,7 +109,7 @@
                                     </mainClass>
                                 </manifest>
                             </archive>
-                            <appendAssemblyId>false</appendAssemblyId>
+                            <appendAssemblyId>true</appendAssemblyId>
                             <descriptorRefs>
                                 <descriptorRef>jar-with-dependencies</descriptorRef>
                             </descriptorRefs>

@@ -7,7 +7,10 @@ import aadesaed.cat.app.Output_Options.Numbering_Mode;
 import aadesaed.cat.cmdline.Args;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
+import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class App {
@@ -41,6 +44,26 @@ public class App {
 
     ArrayList<String> files = config.files;
     Output_State state = new Output_State();
+
+    String no_jar = System.getenv("NO_JAR");
+    if (no_jar.equals("1")) {
+      System.loadLibrary("purrcatfstat");
+    } else {
+      Path dest = Paths.get(System.getProperty("user.home"), ".local/state");
+      String newjl = System.getProperty("java.library.path") + ":" + dest.toString();
+
+      System.setProperty("java.library.path", newjl);
+
+      Path sopath = dest.resolve("purrcatfstat.so");
+
+      if (!Files.exists(sopath)) Files.createFile(sopath);
+
+      var res = App.class.getResourceAsStream("/META-INF/libpurrcatfstat.so");
+      Files.write(sopath, res.readAllBytes());
+
+      System.load(sopath.toString());
+    }
+
     for (String path : files) {
       // check what file is.
       try {
@@ -53,7 +76,7 @@ public class App {
         code = 1;
       } catch (Purrcat_Exception pe) {
         System.err.println(path + ": " + pe.getLocalizedMessage());
-        code = 1;
+        exit(1);
       }
     }
     exit(code);

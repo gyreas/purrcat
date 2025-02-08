@@ -12,7 +12,6 @@
         <class name="aadesaed.cat.TEST_tabbed"/>
         <class name="aadesaed.cat.TEST_three"/>
         <class name="aadesaed.cat.TEST_multiple"/>
-        <class name="aadesaed.cat.TEST_consistent"/>
         <!--* TODO: Investigate why this dooms the last (yeah, always the last one) testcase
           * Uncomment the line below, after commenting other classes, to check for consistency
         <class name="aadesaed.cat.TEST_consistent"/>
