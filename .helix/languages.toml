@@ -1,0 +1,3 @@
+[[language]]
+name = "java"
+formatter = { command = "java", args = ["-jar", "/home/saed/Downloads/google-java-format-1.19.1-all-deps.jar", "--aosp", "-"] }
