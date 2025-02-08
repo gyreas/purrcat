@@ -1,5 +1,6 @@
 *.iml
 /*.java
+/*.jar
 /docs
 /out
 *.class
