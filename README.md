@@ -19,11 +19,10 @@ It's a toy program to improve my familiarity with the Java ecosystem.
 - [x] implement file i/o etc
 - [x] implement feature's of Unix cat, so that this cat can purr.
 - [x] Majestic error/exception handling
-- [ ] Detect if output file is among input files to avoid blowing the file size.
-- [ ] reading from stdin and
+- [*] Detect if output file is among input files to avoid blowing the file size.
+- [ ] reading from stdin and sockets
   - [x] stdin
   - [ ] sockets
 - [x] bundle as jar, to infinity
 - [x] upgrade to maven
-- [ ] upgrade to gradle
 - [ ] no more than 4x slower than Unix cat--this purrcat can run too.
