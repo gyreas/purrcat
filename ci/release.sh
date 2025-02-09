@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+set -xue
+
 CI=1 make package
 
 PROPS="$(find src -regex .*\.properties)"
