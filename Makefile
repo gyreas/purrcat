@@ -66,14 +66,7 @@ package: setup $(LIBSO)
 	@echo $(INFO)
 	@echo "$(INFO) Making package: $(PACKAGE)"
 
-# @echo "$(INFO) Formatting all source files";
-# google-java-format-1.19.1-all-deps.jar
-# java --aosp --replace               \
-#      -jar "$(HOME)/Downloads/gvfmt.jar" \
-#      $(find test/ src/ -regex ".*\.java")
-
-	ls ~/
-	ls .
+	@echo "$(INFO) Formatting all source files"; ./format-all.sh
 
 	@echo $(INFO)
 	@echo $(INFO)
