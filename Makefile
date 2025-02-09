@@ -72,7 +72,7 @@ package: setup $(LIBSO)
 #      -jar "$(HOME)/Downloads/gvfmt.jar" \
 #      $(find test/ src/ -regex ".*\.java")
 
-	ls ~/Downloads
+	ls ~/
 	ls .
 
 	@echo $(INFO)
