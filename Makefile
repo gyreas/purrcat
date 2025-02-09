@@ -71,7 +71,7 @@ package: setup $(LIBSO)
 	@echo $(INFO)
 	@echo $(INFO)
 	@printf "$(INFO) "
-	TEST=1 mvn -B package --file pom.xml
+	TEST=1 mvn -e -B package --file pom.xml
 
 	@echo "$(INFO) ----------------------------< POST PACKAGE >----------------------------"
 
