@@ -4,7 +4,8 @@
 
 CI=1 make package
 
-git show
+git log --oneline
+git show --minimal
  
 gh release list
 
