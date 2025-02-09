@@ -27,9 +27,15 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
     - name: Build with Maven
-      run: CI=1 make package
+      run: CI=1 make build
 
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+    - name: Make a release
+      run: |
+        CI=1 make package
+        version="$(git tag --sort -taggerdate | head -n1)"
+        gh release create "$version"                          \
+           --generate-notes                                   \
+          'target/purrcat-"$(echo version | cut -c 2-)"*.jar' \
+          'target/purrcat'
       env:
         GITHUB_TOKEN: ${{ github.token }}
