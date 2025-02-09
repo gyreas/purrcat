@@ -1,9 +1,13 @@
-#!/usr/bin/env -S bash
+#!/usr/bin/bash
+
+set -xue
 
 CI=1 make package
 VERSION="$(git tag --sort -taggerdate | head -n1 | cut -c 2-)"
 
-gh release create "v$VERSION"        \
-   --generate-notes                  \
-  $(pwd)/target/purrcat-$VERSION.jar \
-  $(pwd)/target/purrcat
+echo $VERSION
+
+gh release create "v$VERSION" \
+   --generate-notes           \
+  target/purrcat-$VERSION.jar \
+  target/purrcat
