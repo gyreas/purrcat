@@ -66,7 +66,11 @@ package: setup $(LIBSO)
 	@echo $(INFO)
 	@echo "$(INFO) Making package: $(PACKAGE)"
 
-	@echo "$(INFO) Formatting all source files"; ./format-all.sh
+# @echo "$(INFO) Formatting all source files";
+# google-java-format-1.19.1-all-deps.jar
+# java --aosp --replace               \
+#      -jar "$(HOME)/Downloads/gvfmt.jar" \
+#      $(find test/ src/ -regex ".*\.java")
 
 	@echo $(INFO)
 	@echo $(INFO)
@@ -83,10 +87,10 @@ package: setup $(LIBSO)
 	cd "$(TARGETDIR)/$(ARTIFACT)";   \
 	jar -xf "../$(PACKAGE)";         \
 	cp $(LIBSO) ./META-INF/;         \
-	jar -c -f ../$(PACKAGE) .;
+	jar -m ./META-INF/MANIFEST.MF -c -f ../$(PACKAGE) .
 
 	@printf "$(INFO) "
-	printf "java -cp %s %s \$$@\n" $(TARGETDIR)/$(PACKAGE) $(NAME) > $(SCRIPT)
+	printf "java -jar %s \$$@\n" $(TARGETDIR)/$(PACKAGE) > $(SCRIPT)
 
 	@printf "$(INFO) "
 	chmod +x $(SCRIPT)
