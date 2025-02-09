@@ -4,8 +4,7 @@ set -xue
 
 CI=1 make package
 
-git tag --sort -taggerdate | head -n1 | cut -c 2-
-
+git tag --sort -taggerdate 
 VERSION="$(git tag --sort -taggerdate | head -n1 | cut -c 2-)"
 
 echo $VERSION
