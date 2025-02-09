@@ -1,3 +1,5 @@
+#!/usr/bin/env -S bash
+
 CI=1 make package
 VERSION="$(git tag --sort -taggerdate | head -n1 | cut -c 2-)"
 
