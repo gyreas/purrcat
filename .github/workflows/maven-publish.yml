@@ -32,10 +32,12 @@ jobs:
     - name: Make a release
       run: |
         CI=1 make package
-        version="$(git tag --sort -taggerdate | head -n1 | cut -c 2-)"
-        gh release create "v$version"           \
-           --generate-notes                     \
-          "$(pwd)/target/purrcat-$version.jar"  \
-          "$(pwd)/target/purrcat"
+        export version="$(git tag --sort -taggerdate | head -n1 | cut -c 2-)"
+        ls $(pwd)/target
+        echo "$version"
+        gh release create "v$version"             \
+           --generate-notes                       \
+          $(pwd)/target/purrcat-"${version}".jar  \
+          $(pwd)/target/purrcat
       env:
         GITHUB_TOKEN: ${{ github.token }}
