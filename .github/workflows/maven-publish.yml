@@ -35,7 +35,7 @@ jobs:
         version="$(git tag --sort -taggerdate | head -n1)"
         gh release create "$version"                          \
            --generate-notes                                   \
-          'target/purrcat-"$(echo version | cut -c 2-)"*.jar' \
-          'target/purrcat'
+          '$(pwd)/target/purrcat-"$(echo version | cut -c 2-)"*.jar' \
+          '$(pwd)/target/purrcat'
       env:
         GITHUB_TOKEN: ${{ github.token }}
